@@ -1,0 +1,130 @@
+.playlist-item-container {
+  width: 16%;
+  height: 203px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+}
+.playlist-img {
+  width: 100%;
+  height: 90%;
+  border-radius: 8px;
+}
+
+.playlist-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #f8fafc;
+  text-align: center;
+  text-decoration: none;
+  margin-top: 0px;
+}
+
+.home-page-container {
+  width: 1440px;
+  background-color: #181818;
+  display: flex;
+}
+.playlist-categories-newrelease-container {
+  width: 90%;
+  height: 100%;
+  justify-self: flex-end;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-left: 32px;
+  padding-right: 74px;
+  gap: 64px;
+}
+
+.editorsPicks-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.sub-heading {
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0px;
+}
+
+.editorsPicks-list {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 48px;
+  padding: 0px;
+  margin: 0px;
+}
+.loader-or-failure-container {
+  width: 100%;
+  height: 454px;
+  background-color: #040306;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.spotify-icon {
+  width: 148px;
+  height: 62px;
+}
+.loading-text {
+  font-size: 40px;
+  font-weight: 700;
+  text-align: center;
+  color: #ffffff;
+  margin-top: 0px;
+}
+.failure-text {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  margin: 0px;
+}
+.try-again-button {
+  width: 95px;
+  height: 32px;
+  background-color: #ffffff;
+  text-align: center;
+  border-radius: 4px;
+  color: #171f46;
+  font-size: 14px;
+  font-weight: 600;
+  border: 0px;
+}
+
+.genre-mood-item {
+  width: 16%;
+  height: 166px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-radius: 8px;
+  text-decoration: none;
+  padding-left: 12px;
+  overflow: hidden;
+}
+
+.genre-name {
+  color: #f8fafc;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.genre-icon {
+  width: 100px;
+  height: 100px;
+  align-self: flex-end;
+  justify-content: flex-end;
+}
