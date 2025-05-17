@@ -1,0 +1,146 @@
+.playlist-info-container {
+  width: 100%;
+  height: 295px;
+  display: flex;
+  gap: 24px;
+}
+.playlist-img {
+  width: 295px;
+  height: 295px;
+  border-radius: 8px;
+}
+.info {
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-self: flex-end;
+}
+.feature-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0px;
+}
+.playlist-name {
+  font-size: 80px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0px;
+}
+.artists-names {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0px;
+}
+
+.playlist-item-container {
+  width: 100%;
+  height: 41px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px 0px;
+  border: 1px solid green;
+  color: #ffffff;
+}
+
+.playlist-item-container p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.playlist-item-container > p:nth-child(1) {
+  /* Track Number */
+  width: 40px;
+  flex-shrink: 0;
+  text-align: left;
+}
+
+.playlist-item-container > p:nth-child(2) {
+  /* Track Name */
+  flex: 2;
+}
+
+.playlist-item-container > p:nth-child(3) {
+  /* Album */
+  flex: 2;
+}
+
+.playlist-item-container > p:nth-child(4) {
+  /* Time */
+  width: 60px;
+  flex-shrink: 0;
+}
+
+.playlist-item-container > p:nth-child(5) {
+  /* Artist */
+  flex: 1.5;
+}
+
+.playlist-item-container > p:nth-child(6) {
+  /* Added */
+  flex: 1;
+  text-align: right;
+}
+
+.playlist-item-text-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 175px;
+}
+
+.playlist-container {
+  width: 1440px;
+  height: 100vh;
+  background-color: #181818;
+  display: flex;
+}
+.playlist-content-container {
+  width: 90%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-left: 32px;
+  gap: 24px;
+}
+
+.back-button {
+  width: 58px;
+  height: 24px;
+  background-color: transparent;
+  border: 0px;
+}
+.back-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: #f8fafc;
+}
+.playlist-items-heading {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 175px;
+  padding-left: 57px;
+}
+.item-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: #f8fafc;
+  overflow: hidden;
+  line-height: 24px;
+}
+.playlist-list {
+  margin: 0px;
+  padding: 0px;
+}
