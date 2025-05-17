@@ -1,8 +1,28 @@
 .sidebar-container {
-  width: 10%;
+  width: 8%;
   height: 100%;
+  background-color: #040306;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+}
+.logout-button {
+  background-color: transparent;
+  border: 0px;
+  margin-bottom: 24px;
+}
+.logout-icon {
+  width: 100%;
+}
+.logout-text {
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+  color: #9b9b9b;
+  margin: 0px;
+}
+.spotify-logo {
+  width: 80%;
+  margin-top: 24px;
 }

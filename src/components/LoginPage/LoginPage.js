@@ -2,7 +2,7 @@ import {useState} from 'react'
 import Cookies from 'js-cookie'
 import './LoginPage.css'
 
-const LoginPage = () => {
+const LoginPage = props => {
   const [userName, SetUserName] = useState('')
   const [password, SetPassword] = useState('')
   const [errorMessage, SetErrorMessage] = useState('')
@@ -18,10 +18,13 @@ const LoginPage = () => {
   }
 
   const onLoginSuccess = jwtToken => {
+    console.log(jwtToken)
     Cookies.set('jwt_token', jwtToken, {
       expires: 30,
       path: '/',
     })
+    const {history} = props
+    history.replace('/')
   }
 
   const onLoginSubmit = async event => {

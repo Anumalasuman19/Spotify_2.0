@@ -24,6 +24,7 @@
 
 .home-page-container {
   width: 1440px;
+  height: 100vh;
   background-color: #181818;
   display: flex;
 }
@@ -36,6 +37,7 @@
   justify-content: flex-start;
   padding-left: 32px;
   padding-right: 74px;
+  overflow: auto;
   gap: 64px;
 }
 

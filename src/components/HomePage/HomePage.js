@@ -1,11 +1,12 @@
 import {Link} from 'react-router-dom'
 import {useState, useEffect} from 'react'
 import './HomePage.css'
+import SideBar from '../SideBar/SideBar'
 
 export const FeatureItem = props => {
-  const {imgUrl, name} = props
+  const {imgUrl, name, id} = props
   return (
-    <Link className="playlist-item-container" to="/">
+    <Link className="playlist-item-container" to={`/playlist/${id}`}>
       <img className="playlist-img" src={imgUrl} alt="ssd" />
       <h2 className="playlist-name">{name}</h2>
     </Link>
@@ -197,6 +198,7 @@ const HomePage = () => {
                 key={item.id}
                 imgUrl={item.icons?.[0]?.url || item.images?.[0]?.url}
                 name={item.name}
+                id={item.id}
                 index={index}
               />
             ))}
@@ -223,6 +225,7 @@ const HomePage = () => {
 
   return (
     <div className="home-page-container">
+      <SideBar />
       <div className="playlist-categories-newrelease-container">
         {renderSection(
           editorsPicksApiStatus,
