@@ -1,8 +1,8 @@
-import {useEffect, useState} from 'react'
+import {useEffect, useState, useRef} from 'react'
 import SideBar from '../SideBar/SideBar'
 import './PlaylistDetails.css'
 
-const PlaylistInfo = props => {
+export const PlaylistInfo = props => {
   const {imgUrl, playlistName, featureName} = props
   return (
     <div className="playlist-info-container">
@@ -15,9 +15,18 @@ const PlaylistInfo = props => {
     </div>
   )
 }
-
 const PlaylistItemInfo = props => {
-  const {songNumber, track, album, duration, artists, addedDuration} = props
+  const {
+    songNumber,
+    track,
+    album,
+    duration,
+    artists,
+    addedDuration,
+    id,
+    onClickOfItem,
+    isSelected,
+  } = props
   const convertMillisToMinSec = ms => {
     const totalSeconds = Math.floor(ms / 1000)
     const minutes = Math.floor(totalSeconds / 60)
@@ -41,19 +50,77 @@ const PlaylistItemInfo = props => {
     return `${diffMonths} months ago`
   }
 
+  const onClickOfPlaylistItem = () => {
+    onClickOfItem(id)
+  }
+  const containerStyle = isSelected ? 'playlist-selected-item-container' : ''
   return (
-    <div className="playlist-item-container">
+    <li
+      className={`playlist-item-container ${containerStyle}`}
+      onClick={onClickOfPlaylistItem}
+    >
       <p className="item-text">{songNumber}</p>
       <p className="item-text">{track}</p>
       <p className="item-text">{album}</p>
       <p className="item-text">{convertMillisToMinSec(duration)}</p>
       <p className="item-text">{artists[0].name}</p>
       <p className="item-text">{getTimeAgo(addedDuration)}</p>
+    </li>
+  )
+}
+
+export const AudioPlayer = ({track, imgUrl}) => {
+  const audioRef = useRef(null)
+  const [artists, SetArtist] = useState('')
+  useEffect(() => {
+    if (audioRef.current && track.previewUrl) {
+      SetArtist(track.artists[0].name)
+      audioRef.current.load() // Reloads new src
+      audioRef.current.play().catch(error => {
+        console.warn('Auto-play failed:', error)
+      })
+    }
+  }, [track])
+  return (
+    <div className="audio-container">
+      {/* Song Info */}
+      <div className="song-info">
+        <img src={imgUrl} alt="Album Art" className="album-image" />
+        <div className="song-and-artist">
+          <p className="song-title">{track.name}</p>
+          <p className="song-title">{artists}</p>
+        </div>
+      </div>
+
+      {/* Audio Controls */}
+      <div className="audio-controls">
+        {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+        <audio
+          ref={audioRef}
+          controls
+          src={track.previewUrl}
+          className="audio-element"
+        />
+      </div>
+
+      {/* Volume Control */}
+      <div className="volume-control">
+        <span role="img" aria-label="volume">
+          🔊
+        </span>
+        <input
+          type="range"
+          min="0"
+          max="100"
+          defaultValue="70"
+          className="volume-slider"
+        />
+      </div>
     </div>
   )
 }
 
-const apiStatus = {
+export const apiStatus = {
   initial: 'INITIAL',
   inprogress: 'IN_PROGRESS',
   success: 'SUCCESS',
@@ -63,6 +130,7 @@ const apiStatus = {
 const PlaylistDetails = ({match}) => {
   const [playlistApiStatus, SetPlaylistApiStatus] = useState(apiStatus.initial)
   const [playlistData, SetPlaylistData] = useState({})
+  const [currentSelectedTrack, SetCurrentSelectedTrack] = useState({})
 
   const toCamelCase = str =>
     str.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase())
@@ -85,19 +153,14 @@ const PlaylistDetails = ({match}) => {
     SetPlaylistApiStatus(apiStatus.inprogress)
     const {id} = match.params
     const url = `https://apis2.ccbp.in/spotify-clone/playlists-details/${id}`
-    const options = {method: 'GET'}
 
     try {
-      const apiResponse = await fetch(url, options)
-      const rawData = await apiResponse.json()
+      const response = await fetch(url)
+      const rawData = await response.json()
       const jsonData = convertKeysToCamelCase(rawData)
-
-      if (apiResponse.ok) {
-        SetPlaylistData(jsonData)
-        SetPlaylistApiStatus(apiStatus.success)
-      } else {
-        SetPlaylistApiStatus(apiStatus.failure)
-      }
+      SetPlaylistData(jsonData)
+      SetPlaylistApiStatus(apiStatus.success)
+      console.log(jsonData)
     } catch {
       SetPlaylistApiStatus(apiStatus.failure)
     }
@@ -131,6 +194,17 @@ const PlaylistDetails = ({match}) => {
     </div>
   )
 
+  const onClickOfPlaylistItem = id => {
+    const selectedItem = playlistData.tracks.items.find(
+      item => item.track.id === id,
+    )
+    console.log(selectedItem.track.artists[0].name)
+
+    if (selectedItem) {
+      SetCurrentSelectedTrack(selectedItem.track)
+    }
+  }
+
   const renderSection = () => {
     const padding = '60px'
     let content
@@ -149,46 +223,51 @@ const PlaylistDetails = ({match}) => {
           ? playlistData.tracks.items
           : []
         content = (
-          <>
-            <PlaylistInfo
-              imgUrl={imageUrl}
-              playlistName={playlistData.name}
-              featureName="Editor's picks"
-            />
-            <div className="playlist-item-container">
-              <p className="item-text" style={{padding}}>
-                Track
-              </p>
-              <p className="item-text">Album</p>
-              <p className="item-text">Time</p>
-              <p className="item-text">Artist</p>
-              <p className="item-text">Added</p>
-            </div>
-            <hr />
-            <ul className="playlist-list">
-              {trackItems.map((item, index) => (
-                <PlaylistItemInfo
-                  key={item.id || index}
-                  songNumber={index + 1}
-                  track={item.track?.name || 'Unknown'}
-                  album={item.track?.album?.name || 'Unknown'}
-                  duration={item.track?.durationMs || 0}
-                  artists={item.track?.artists || []}
-                  addedDuration={item.addedAt}
-                />
-              ))}
-            </ul>
-
-            <figure>
-              <figcaption>Listen to the T-Rex:</figcaption>
-              {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-              <audio
-                controls
-                src={playlistData.tracks.items[0].track.preview_url}
+          <div className="playlist-content-container">
+            <div>
+              <button type="button" className="back-button">
+                <p className="back-text">Back</p>
+              </button>
+              <PlaylistInfo
+                imgUrl={imageUrl}
+                playlistName={playlistData.name}
+                featureName="Editor's picks"
               />
-              <a href="/shared-assets/audio/t-rex-roar.mp3">Download audio</a>
-            </figure>
-          </>
+              <div className="playlist-item-container">
+                <p className="item-text" style={{padding}}>
+                  Track
+                </p>
+                <p className="item-text">Album</p>
+                <p className="item-text">Time</p>
+                <p className="item-text">Artist</p>
+                <p className="item-text">Added</p>
+              </div>
+              <hr />
+              <ul className="playlist-list">
+                {trackItems.map((item, index) => (
+                  <PlaylistItemInfo
+                    key={item.track.id || index}
+                    songNumber={index + 1}
+                    track={item.track?.name || 'Unknown'}
+                    album={item.track?.album?.name || 'Unknown'}
+                    duration={item.track?.durationMs || 0}
+                    artists={item.track?.artists || []}
+                    addedDuration={item.addedAt}
+                    onClickOfItem={onClickOfPlaylistItem}
+                    id={item.track?.id}
+                    isSelected={currentSelectedTrack.id === item.track?.id}
+                  />
+                ))}
+              </ul>
+            </div>
+            <div>
+              <hr />
+              <AudioPlayer
+                track={currentSelectedTrack}
+                imgUrl={currentSelectedTrack?.album?.images[0].url}
+              />
+            </div>
+          </div>
         )
         break
       }
@@ -204,15 +283,20 @@ const PlaylistDetails = ({match}) => {
     makePlaylistApi()
   }, [match.params.id])
 
+  useEffect(() => {
+    if (
+      playlistApiStatus === apiStatus.success &&
+      playlistData.tracks?.items?.length > 0
+    ) {
+      console.log(playlistData.tracks?.items[0].track)
+      SetCurrentSelectedTrack(playlistData.tracks.items[0].track)
+    }
+  }, [playlistApiStatus, playlistData])
+
   return (
     <div className="playlist-container">
       <SideBar />
-      <div className="playlist-content-container">
-        <button type="button" className="back-button">
-          <p className="back-text">Back</p>
-        </button>
-        {renderSection()}
-      </div>
+      {renderSection()}
     </div>
   )
 }

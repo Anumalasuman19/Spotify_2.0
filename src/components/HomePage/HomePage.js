@@ -4,11 +4,12 @@ import './HomePage.css'
 import SideBar from '../SideBar/SideBar'
 
 export const FeatureItem = props => {
-  const {imgUrl, name, id} = props
+  const {imgUrl, name, id, section} = props
+  const pathUrl = section === 'editors' ? `/playlist/${id}` : `/album/${id}`
   return (
-    <Link className="playlist-item-container" to={`/playlist/${id}`}>
-      <img className="playlist-img" src={imgUrl} alt="ssd" />
-      <h2 className="playlist-name">{name}</h2>
+    <Link className="playlist-item-Details" to={pathUrl}>
+      <img className="playlist-item-img" src={imgUrl} alt="ssd" />
+      <h2 className="playlist-item-name">{name}</h2>
     </Link>
   )
 }
@@ -36,11 +37,15 @@ const colorPalette = [
   '#BC6FF1',
 ]
 
-export const GenreMoodItem = ({name, imgUrl, index}) => {
+export const GenreMoodItem = ({name, imgUrl, index, id}) => {
   const backgroundColor = colorPalette[index % colorPalette.length]
 
   return (
-    <Link className="genre-mood-item" style={{backgroundColor}} to="/">
+    <Link
+      className="genre-mood-item"
+      style={{backgroundColor}}
+      to={`/category/${id}/playlists`}
+    >
       <p className="genre-name">{name}</p>
       <img className="genre-icon" src={imgUrl} alt={name} />
     </Link>
@@ -200,6 +205,7 @@ const HomePage = () => {
                 name={item.name}
                 id={item.id}
                 index={index}
+                section={section}
               />
             ))}
           </ul>

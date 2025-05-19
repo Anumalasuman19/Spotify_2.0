@@ -1,0 +1,45 @@
+.category-item-details-container {
+  width: 16%;
+  height: 236px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.category-container {
+  width: 1440px;
+  height: 100vh;
+  background-color: #181818;
+  border: 1px solid blue;
+  display: flex;
+  flex-direction: row;
+}
+.category-content-container {
+  width: 500px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-left: 32px;
+  overflow: auto;
+  border: 1px green solid;
+  gap: 24px;
+}
+.category-list-container {
+  width: 100%;
+}
+.category-img {
+  width: 100%;
+  height: 166px;
+}
+.name {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+}
+.total-tracks {
+  font-size: 18px;
+  font-weight: 600;
+  color: #64748b;
+}
