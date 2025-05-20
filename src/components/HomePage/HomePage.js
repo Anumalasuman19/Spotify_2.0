@@ -4,11 +4,11 @@ import './HomePage.css'
 import SideBar from '../SideBar/SideBar'
 
 export const FeatureItem = props => {
-  const {imgUrl, name, id, section} = props
+  const {imgUrl, name, id, section, altText} = props
   const pathUrl = section === 'editors' ? `/playlist/${id}` : `/album/${id}`
   return (
     <Link className="playlist-item-Details" to={pathUrl}>
-      <img className="playlist-item-img" src={imgUrl} alt="ssd" />
+      <img className="playlist-item-img" src={imgUrl} alt={altText} />
       <h2 className="playlist-item-name">{name}</h2>
     </Link>
   )
@@ -37,7 +37,7 @@ const colorPalette = [
   '#BC6FF1',
 ]
 
-export const GenreMoodItem = ({name, imgUrl, index, id}) => {
+export const GenreMoodItem = ({name, imgUrl, index, id, altText}) => {
   const backgroundColor = colorPalette[index % colorPalette.length]
 
   return (
@@ -47,7 +47,7 @@ export const GenreMoodItem = ({name, imgUrl, index, id}) => {
       to={`/category/${id}/playlists`}
     >
       <p className="genre-name">{name}</p>
-      <img className="genre-icon" src={imgUrl} alt={name} />
+      <img className="genre-icon" src={imgUrl} alt={altText} />
     </Link>
   )
 }
@@ -175,6 +175,10 @@ const HomePage = () => {
 
   const failureView = section => (
     <div className="loader-or-failure-container">
+      <img
+        src="https://res.cloudinary.com/dzki1pesn/image/upload/v1747733067/wdy0iusw5knlayakakjm.png"
+        alt="page not found"
+      />
       <p className="failure-text">Something went wrong. Please try again</p>
       <button
         type="button"
@@ -186,7 +190,7 @@ const HomePage = () => {
     </div>
   )
 
-  const renderSection = (status, data, Component, section, title) => {
+  const renderSection = (status, data, Component, section, title, altText) => {
     let content
     switch (status) {
       case apiStatus.inprogress:
@@ -206,6 +210,7 @@ const HomePage = () => {
                 id={item.id}
                 index={index}
                 section={section}
+                altText={altText}
               />
             ))}
           </ul>
@@ -239,6 +244,7 @@ const HomePage = () => {
           FeatureItem,
           'editors',
           'Editor’s picks',
+          'featured playlist',
         )}
         {renderSection(
           categoryApiStatus,
@@ -246,6 +252,7 @@ const HomePage = () => {
           GenreMoodItem,
           'categories',
           'Genres & Moods',
+          'category',
         )}
         {renderSection(
           newReleaseApiStatus,
@@ -253,6 +260,7 @@ const HomePage = () => {
           FeatureItem,
           'newReleases',
           'New releases',
+          'new release album',
         )}
       </div>
     </div>

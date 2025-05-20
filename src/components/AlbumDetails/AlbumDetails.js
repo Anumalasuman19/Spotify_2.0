@@ -41,7 +41,7 @@ const AlbumItemInfo = props => {
   )
 }
 
-const AlbumDetails = ({match}) => {
+const AlbumDetails = ({match, history}) => {
   const [newReleaseAlbumStatus, SetNewReleaseAlbumStatus] = useState(
     apiStatus.initial,
   )
@@ -83,7 +83,7 @@ const AlbumDetails = ({match}) => {
   }
 
   const loadingView = () => (
-    <div className="loader-or-failure-container">
+    <div className="playlist-loader-or-failure-container">
       <img
         className="spotify-icon"
         src="https://res.cloudinary.com/dzki1pesn/image/upload/v1747385633/spotify-logo_fdkhrw.png"
@@ -98,7 +98,11 @@ const AlbumDetails = ({match}) => {
   }
 
   const failureView = () => (
-    <div className="loader-or-failure-container">
+    <div className="playlist-loader-or-failure-container">
+      <img
+        src="https://res.cloudinary.com/dzki1pesn/image/upload/v1747733067/wdy0iusw5knlayakakjm.png"
+        alt="page not found"
+      />
       <p className="failure-text">Something went wrong. Please try again</p>
       <button
         type="button"
@@ -124,6 +128,10 @@ const AlbumDetails = ({match}) => {
     }
   }
 
+  const onClickOfBack = () => {
+    history.push('/')
+  }
+
   const renderSection = () => {
     let content
     switch (newReleaseAlbumStatus) {
@@ -144,34 +152,33 @@ const AlbumDetails = ({match}) => {
         content = (
           <div className="playlist-content-container">
             <div className="back-and-album-container">
-              <button type="button" className="back-button">
-                <p className="back-text">Back</p>
-              </button>
               <PlaylistInfo
                 imgUrl={imageUrl}
                 playlistName={newReleaseAlbumData.name}
                 featureName="newRelease"
               />
-              <div className="album-item-container">
-                <p className="item-text">#</p>
-                <p className="item-text">Track</p>
-                <p className="item-text">Time</p>
-                <p className="item-text">Popularity</p>
+              <div className="album-titles-and-album-list">
+                <div className="album-item-container">
+                  <p className="item-text">#</p>
+                  <p className="item-text">Track</p>
+                  <p className="item-text">Time</p>
+                  <p className="item-text">Popularity</p>
+                </div>
+                <hr className="horizontal-line-style" />
+                <ul className="album-list">
+                  {trackItems.map((item, index) => (
+                    <AlbumItemInfo
+                      key={item?.id || index}
+                      songNumber={item.trackNumber}
+                      track={item?.name || 'Unknown'}
+                      duration={item?.durationMs || 0}
+                      onClickOfItem={onClickOfAlbumItem}
+                      id={item.id}
+                      isSelected={currentPlayingAlbum.id === item.id}
+                    />
+                  ))}
+                </ul>
               </div>
-              <hr className="horizontal-line" />
-              <ul className="album-list">
-                {trackItems.map((item, index) => (
-                  <AlbumItemInfo
-                    key={item?.id || index}
-                    songNumber={item.trackNumber}
-                    track={item?.name || 'Unknown'}
-                    duration={item?.durationMs || 0}
-                    onClickOfItem={onClickOfAlbumItem}
-                    id={item.id}
-                    isSelected={currentPlayingAlbum.id === item.id}
-                  />
-                ))}
-              </ul>
             </div>
             <div className="current-song-container">
               <hr />
@@ -196,10 +203,28 @@ const AlbumDetails = ({match}) => {
     newReleaseAlbumPlaylistApiUrl()
   }, [])
 
+  useEffect(() => {
+    if (
+      newReleaseAlbumStatus === apiStatus.success &&
+      newReleaseAlbumData?.tracks?.items?.length > 0
+    ) {
+      SetCurrentPlayingAlbum(newReleaseAlbumData?.tracks?.items[0])
+    }
+  }, [newReleaseAlbumStatus, newReleaseAlbumData])
+
   return (
     <div className="playlist-container">
       <SideBar />
-      {renderSection()}
+      <div className="playlist-content-wrapper">
+        <button type="button" className="back-button" onClick={onClickOfBack}>
+          <img
+            src="https://res.cloudinary.com/dzki1pesn/image/upload/v1747725509/kytu7w7vqvvwe4iwz1l6.png"
+            alt="back-button"
+          />
+          <p className="back-text">Back</p>
+        </button>
+        {renderSection()}
+      </div>
     </div>
   )
 }

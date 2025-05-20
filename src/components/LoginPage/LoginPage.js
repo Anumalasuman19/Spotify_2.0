@@ -1,6 +1,7 @@
 import {useState} from 'react'
 import Cookies from 'js-cookie'
 import './LoginPage.css'
+import {Redirect} from 'react-router-dom'
 
 const LoginPage = props => {
   const [userName, SetUserName] = useState('')
@@ -53,7 +54,10 @@ const LoginPage = props => {
       SetErrorMessage(jsonResponse.error_msg)
     }
   }
-
+  const jwtToken = Cookies.get('jwt_token')
+  if (jwtToken !== undefined) {
+    return <Redirect to="/" />
+  }
   return (
     <div className="login-container">
       {isLoading ? (
@@ -61,7 +65,7 @@ const LoginPage = props => {
           <img
             className="spotify-icon"
             src="https://res.cloudinary.com/dzki1pesn/image/upload/v1747385633/spotify-logo_fdkhrw.png"
-            alt="fsfs"
+            alt="login website logo"
           />
           <h1 className="loading-text">Loading...</h1>
         </div>
@@ -71,7 +75,7 @@ const LoginPage = props => {
             <img
               src="https://res.cloudinary.com/dzki1pesn/image/upload/v1747385633/spotify-logo_fdkhrw.png"
               className="spotify-icon"
-              alt="lflf"
+              alt="login website logo"
             />
             <h1 className="login-heading">Spotify Remix</h1>
           </div>

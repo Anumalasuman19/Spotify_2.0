@@ -9,12 +9,12 @@ const CategoryItemDetails = props => {
     <div className="category-item-details-container">
       <img src={imgUrl} alt="ns" className="category-img" />
       <h2 className="name">{name}</h2>
-      <p className="total-tracks">{totalTracks}</p>
+      <p className="total-tracks">{totalTracks} Tracks</p>
     </div>
   )
 }
 
-const CategoryDetails = ({match}) => {
+const CategoryDetails = ({match, history}) => {
   const [categoryApiStatus, SetCategoryApiStatus] = useState(apiStatus.initial)
   const [categoryApiData, SetCategoryApiData] = useState({})
   const toCamelCase = str =>
@@ -53,7 +53,7 @@ const CategoryDetails = ({match}) => {
   }
 
   const loadingView = () => (
-    <div className="loader-or-failure-container">
+    <div className="playlist-loader-or-failure-container">
       <img
         className="spotify-icon"
         src="https://res.cloudinary.com/dzki1pesn/image/upload/v1747385633/spotify-logo_fdkhrw.png"
@@ -67,8 +67,16 @@ const CategoryDetails = ({match}) => {
     categoryApiStatus()
   }
 
+  const onClickOfBack = () => {
+    history.push('/')
+  }
+
   const failureView = () => (
-    <div className="loader-or-failure-container">
+    <div className="playlist-loader-or-failure-container">
+      <img
+        src="https://res.cloudinary.com/dzki1pesn/image/upload/v1747733067/wdy0iusw5knlayakakjm.png"
+        alt="page not found"
+      />
       <p className="failure-text">Something went wrong. Please try again</p>
       <button
         type="button"
@@ -90,16 +98,13 @@ const CategoryDetails = ({match}) => {
         content = failureView()
         break
       case apiStatus.success: {
-        const trackItems = Array.isArray(categoryApiData?.items)
-          ? categoryApiData.tracks.items
+        const trackItems = Array.isArray(categoryApiData?.playlists.items)
+          ? categoryApiData.playlists.items
           : []
         console.log('trackItems')
-        console.log(categoryApiData?.items)
+        console.log(categoryApiData.playlists.items)
         content = (
           <div className="category-content-container">
-            <button type="button" className="back-button">
-              <p className="back-text">Back</p>
-            </button>
             <ul className="category-list-container">
               {trackItems.map(item => (
                 <CategoryItemDetails
@@ -129,7 +134,16 @@ const CategoryDetails = ({match}) => {
   return (
     <div className="category-container">
       <SideBar />
-      {renderSection()}
+      <div className="playlist-content-wrapper">
+        <button type="button" className="back-button" onClick={onClickOfBack}>
+          <img
+            src="https://res.cloudinary.com/dzki1pesn/image/upload/v1747725509/kytu7w7vqvvwe4iwz1l6.png"
+            alt="back-button"
+          />
+          <p className="back-text">Back</p>
+        </button>
+        {renderSection()}
+      </div>
     </div>
   )
 }

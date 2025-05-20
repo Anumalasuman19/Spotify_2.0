@@ -3,6 +3,7 @@
   height: 295px;
   display: flex;
   gap: 24px;
+  margin-left: 32px;
 }
 .playlist-img {
   width: 295px;
@@ -36,13 +37,15 @@
 }
 
 .playlist-item-container {
-  width: 98%;
+  width: 100%;
   height: 41px;
   display: flex;
   flex-direction: row;
+  justify-content: center;
   align-items: center;
-  padding: 0px 10px;
+  padding: 0px 32px;
   color: #ffffff;
+  margin-top: 24px;
 }
 
 .playlist-item-container p {
@@ -100,37 +103,52 @@
 }
 
 .playlist-container {
-  width: 1440px;
+  width: 100%;
   height: 100vh;
   background-color: #181818;
-  border: 1px solid blue;
   display: flex;
+  padding: 0px;
 }
-.playlist-content-container {
+
+.playlist-content-wrapper {
   width: 92%;
+  height: 100%;
+  flex-grow: 2;
+  overflow-y: auto;
+}
+
+.playlist-content-container {
+  width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding-left: 32px;
-  overflow: auto;
-  border: 1px blanchedalmond solid;
+  gap: 24px;
+  margin: 0px;
+}
+.back-and-playlist-container {
+  display: flex;
+  flex-direction: column;
   gap: 24px;
 }
-* {
-  box-sizing: border-box;
-}
-
 .back-button {
-  width: 58px;
+  width: 68px;
   height: 24px;
   background-color: transparent;
   border: 0px;
+  margin-top: 24px;
+  margin-bottom: 24px;
+  margin-left: 32px;
+  display: flex;
+  gap: 4px;
+  justify-content: center;
 }
 .back-text {
   font-size: 16px;
   font-weight: 600;
   color: #f8fafc;
+  margin: 0px;
+  margin-top: 2px;
 }
 .playlist-items-heading {
   width: 100%;
@@ -151,15 +169,19 @@
   margin: 0px;
   padding: 0px;
 }
-
+.horizontal-line-style {
+  width: 98%;
+  margin: 0px;
+}
 .audio-container {
   width: 100%;
   height: 108px;
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-around;
   background-color: #181818;
-  padding: 24;
+  padding: 24px;
   align-self: flex-end;
 }
 
@@ -222,4 +244,22 @@
   width: 80px;
   height: 2px;
   accent-color: #1db954; /* Spotify green */
+}
+.playlist-loader-or-failure-container {
+  width: 96%;
+  height: 92%;
+  background-color: #040306;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  justify-self: center;
+  gap: 16px;
+  flex-grow: 1;
+}
+.playlist-and-details-container {
+  width: 100%;
+  height: 100%;
 }

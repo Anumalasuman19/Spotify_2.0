@@ -15,7 +15,7 @@ const SideBar = props => {
         <img
           className="spotify-logo"
           src="https://res.cloudinary.com/dzki1pesn/image/upload/v1747385633/spotify-logo_fdkhrw.png"
-          alt="fsfs"
+          alt="website logo"
         />
       </Link>
       <button type="button" className="logout-button" onClick={onClickOfLogout}>
