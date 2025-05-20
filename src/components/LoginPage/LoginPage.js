@@ -106,7 +106,7 @@ const LoginPage = props => {
             />
           </div>
           <button className="login-button" type="submit">
-            LOGIN
+            Login
           </button>
           <p className="error-message">{errorMessage}</p>
         </form>

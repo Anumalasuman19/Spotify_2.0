@@ -1,3 +1,4 @@
+import {Link} from 'react-router-dom'
 import SideBar from '../SideBar/SideBar'
 import './PageNotFound.css'
 
@@ -14,8 +15,11 @@ const PageNotFound = () => (
       </button>
       <div className="heading-and-text">
         <h1 className="page-not-found-heading">404</h1>
-        <p className="page-not-found-text">Page Not Found</p>
+        <h1 className="page-not-found-text">PAGE NOT FOUND</h1>
         <img alt="page not found" />
+        <Link to="/">
+          <button type="button">Home Page</button>
+        </Link>
       </div>
     </div>
   </div>

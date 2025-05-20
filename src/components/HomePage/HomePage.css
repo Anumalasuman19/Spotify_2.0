@@ -1,5 +1,5 @@
 .playlist-item-Details {
-  width: 16%;
+  width: 12%;
   height: 203px;
   display: flex;
   flex-direction: column;
@@ -109,7 +109,7 @@
 }
 
 .genre-mood-item {
-  width: 16%;
+  width: 12%;
   height: 166px;
   display: flex;
   flex-direction: row;

@@ -163,7 +163,7 @@ const HomePage = () => {
     }
   }
   const loadingView = () => (
-    <div className="loader-or-failure-container">
+    <div className="loader-or-failure-container" data-testid="loader">
       <img
         className="spotify-icon"
         src="https://res.cloudinary.com/dzki1pesn/image/upload/v1747385633/spotify-logo_fdkhrw.png"
@@ -177,7 +177,7 @@ const HomePage = () => {
     <div className="loader-or-failure-container">
       <img
         src="https://res.cloudinary.com/dzki1pesn/image/upload/v1747733067/wdy0iusw5knlayakakjm.png"
-        alt="page not found"
+        alt="failure view"
       />
       <p className="failure-text">Something went wrong. Please try again</p>
       <button
@@ -221,10 +221,10 @@ const HomePage = () => {
     }
 
     return (
-      <div className="editorsPicks-container">
+      <nav className="editorsPicks-container">
         <h1 className="sub-heading">{title}</h1>
         {content}
-      </div>
+      </nav>
     )
   }
 

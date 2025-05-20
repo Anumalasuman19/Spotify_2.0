@@ -1,10 +1,11 @@
 .login-container {
-  width: 1440px;
-  height: 1024px;
+  width: 100%;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   background-image: url('https://res.cloudinary.com/dzki1pesn/image/upload/v1747385271/login-bg_p3zjn0.png');
+  background-size: cover;
 }
 
 .login-credentials-container {
@@ -108,4 +109,7 @@
   text-align: center;
   color: #ffffff;
   margin-top: 0px;
+}
+
+@media (width: 360px) and (height: 640px) {
 }

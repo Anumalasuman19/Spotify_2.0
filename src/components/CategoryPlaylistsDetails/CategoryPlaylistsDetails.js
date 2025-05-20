@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react'
 import SideBar from '../SideBar/SideBar'
-import {apiStatus} from '../PlaylistDetails/PlaylistDetails'
-import './CategoryDetails.css'
+import {apiStatus} from '../PlaylistsDetails/PlaylistsDetails'
+import './CategoryPlaylistsDetails.css'
 
 const CategoryItemDetails = props => {
   const {imgUrl, name, totalTracks} = props
@@ -14,7 +14,7 @@ const CategoryItemDetails = props => {
   )
 }
 
-const CategoryDetails = ({match, history}) => {
+const CategoryPlaylistsDetails = ({match, history}) => {
   const [categoryApiStatus, SetCategoryApiStatus] = useState(apiStatus.initial)
   const [categoryApiData, SetCategoryApiData] = useState({})
   const toCamelCase = str =>
@@ -75,7 +75,7 @@ const CategoryDetails = ({match, history}) => {
     <div className="playlist-loader-or-failure-container">
       <img
         src="https://res.cloudinary.com/dzki1pesn/image/upload/v1747733067/wdy0iusw5knlayakakjm.png"
-        alt="page not found"
+        alt="failure view"
       />
       <p className="failure-text">Something went wrong. Please try again</p>
       <button
@@ -147,4 +147,4 @@ const CategoryDetails = ({match, history}) => {
     </div>
   )
 }
-export default CategoryDetails
+export default CategoryPlaylistsDetails

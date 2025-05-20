@@ -4,7 +4,7 @@ import {
   PlaylistInfo,
   AudioPlayer,
   apiStatus,
-} from '../PlaylistDetails/PlaylistDetails'
+} from '../PlaylistsDetails/PlaylistsDetails'
 import './AlbumDetails.css'
 
 const AlbumItemInfo = props => {
@@ -12,11 +12,12 @@ const AlbumItemInfo = props => {
     songNumber,
     track,
     duration,
-    popularity,
+    artists,
     id,
     onClickOfItem,
     isSelected,
   } = props
+  const artistsNames = artists.map(artist => artist.name).join(', ')
   const convertMillisToMinSec = ms => {
     const totalSeconds = Math.floor(ms / 1000)
     const minutes = Math.floor(totalSeconds / 60)
@@ -37,6 +38,7 @@ const AlbumItemInfo = props => {
       <p className="item-text">{songNumber}</p>
       <p className="item-text">{track}</p>
       <p className="item-text">{convertMillisToMinSec(duration)}</p>
+      <p className="item-text">{artistsNames}</p>
     </li>
   )
 }
@@ -101,7 +103,7 @@ const AlbumDetails = ({match, history}) => {
     <div className="playlist-loader-or-failure-container">
       <img
         src="https://res.cloudinary.com/dzki1pesn/image/upload/v1747733067/wdy0iusw5knlayakakjm.png"
-        alt="page not found"
+        alt="failure view"
       />
       <p className="failure-text">Something went wrong. Please try again</p>
       <button
@@ -115,13 +117,9 @@ const AlbumDetails = ({match, history}) => {
   )
 
   const onClickOfAlbumItem = id => {
-    console.log('CLikced')
-    console.log(id)
-    console.log(newReleaseAlbumData.tracks.items)
     const selectedItem = newReleaseAlbumData.tracks.items.find(
       item => item.id === id,
     )
-    console.log(selectedItem.artists[0].name)
 
     if (selectedItem) {
       SetCurrentPlayingAlbum(selectedItem)
@@ -162,7 +160,7 @@ const AlbumDetails = ({match, history}) => {
                   <p className="item-text">#</p>
                   <p className="item-text">Track</p>
                   <p className="item-text">Time</p>
-                  <p className="item-text">Popularity</p>
+                  <p className="item-text">Artist</p>
                 </div>
                 <hr className="horizontal-line-style" />
                 <ul className="album-list">
@@ -172,6 +170,7 @@ const AlbumDetails = ({match, history}) => {
                       songNumber={item.trackNumber}
                       track={item?.name || 'Unknown'}
                       duration={item?.durationMs || 0}
+                      artists={item?.artists}
                       onClickOfItem={onClickOfAlbumItem}
                       id={item.id}
                       isSelected={currentPlayingAlbum.id === item.id}

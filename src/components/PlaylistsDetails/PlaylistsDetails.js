@@ -1,16 +1,16 @@
 import {useEffect, useState, useRef} from 'react'
 import SideBar from '../SideBar/SideBar'
-import './PlaylistDetails.css'
+import './PlaylistsDetails.css'
 
 export const PlaylistInfo = props => {
-  const {imgUrl, playlistName, featureName} = props
+  const {imgUrl, playlistName, featureName, description} = props
   return (
     <div className="playlist-info-container">
       <img src={imgUrl} alt="nsnv" className="playlist-img" />
       <div className="info">
         <p className="feature-name">{featureName}</p>
         <h1 className="playlist-name">{playlistName}</h1>
-        <p className="artists-names">Mickey J. Meyer</p>
+        <p className="artists-names">{description}</p>
       </div>
     </div>
   )
@@ -63,7 +63,10 @@ const PlaylistItemInfo = props => {
       <p className="item-text">{track}</p>
       <p className="item-text">{album}</p>
       <p className="item-text">{convertMillisToMinSec(duration)}</p>
-      <p className="item-text">{artists[0].name}</p>
+      <p className="item-text">
+        {artists.map(artist => artist.name).join(', ')}
+      </p>
+
       <p className="item-text">{getTimeAgo(addedDuration)}</p>
     </li>
   )
@@ -74,7 +77,8 @@ export const AudioPlayer = ({track, imgUrl}) => {
   const [artists, SetArtist] = useState('')
   useEffect(() => {
     if (audioRef.current && track.previewUrl) {
-      SetArtist(track.artists[0].name)
+      const artistsName = track.artists.map(artist => artist.name).join(', ')
+      SetArtist(artistsName)
       audioRef.current.load() // Reloads new src
       audioRef.current.play().catch(error => {
         console.warn('Auto-play failed:', error)
@@ -127,7 +131,7 @@ export const apiStatus = {
   failure: 'FAILURE',
 }
 
-const PlaylistDetails = ({match, history}) => {
+const PlaylistsDetails = ({match, history}) => {
   const [playlistApiStatus, SetPlaylistApiStatus] = useState(apiStatus.initial)
   const [playlistData, SetPlaylistData] = useState({})
   const [currentSelectedTrack, SetCurrentSelectedTrack] = useState({})
@@ -188,7 +192,7 @@ const PlaylistDetails = ({match, history}) => {
     <div className="playlist-loader-or-failure-container">
       <img
         src="https://res.cloudinary.com/dzki1pesn/image/upload/v1747733067/wdy0iusw5knlayakakjm.png"
-        alt="page not found"
+        alt="failure view"
       />
       <p className="failure-text">Something went wrong. Please try again</p>
       <button
@@ -205,7 +209,6 @@ const PlaylistDetails = ({match, history}) => {
     const selectedItem = playlistData.tracks.items.find(
       item => item.track.id === id,
     )
-    console.log(selectedItem.track.artists[0].name)
 
     if (selectedItem) {
       SetCurrentSelectedTrack(selectedItem.track)
@@ -236,6 +239,7 @@ const PlaylistDetails = ({match, history}) => {
                 imgUrl={imageUrl}
                 playlistName={playlistData.name}
                 featureName="Editor's picks"
+                description={playlistData.description}
               />
               <div className="playlist-item-container">
                 <p className="item-text" style={{padding}}>
@@ -309,9 +313,10 @@ const PlaylistDetails = ({match, history}) => {
           <p className="back-text">Back</p>
         </button>
         {renderSection()}
+        <p className="playlist-description">{playlistData.description}</p>
       </div>
     </div>
   )
 }
 
-export default PlaylistDetails
+export default PlaylistsDetails
