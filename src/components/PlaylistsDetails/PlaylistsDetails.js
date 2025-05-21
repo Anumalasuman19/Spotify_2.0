@@ -4,14 +4,13 @@ import SideBar from '../SideBar/SideBar'
 import './PlaylistsDetails.css'
 
 export const PlaylistInfo = props => {
-  const {imgUrl, playlistName, featureName, description} = props
+  const {imgUrl, playlistName, featureName} = props
   return (
     <div className="playlist-info-container">
       <img src={imgUrl} alt="nsnv" className="playlist-img" />
       <div className="info">
         <p className="feature-name">{featureName}</p>
         <h1 className="playlist-name">{playlistName}</h1>
-        <p className="artists-names">{description}</p>
       </div>
     </div>
   )
@@ -74,18 +73,8 @@ const PlaylistItemInfo = props => {
 }
 
 export const AudioPlayer = ({track, imgUrl}) => {
-  const audioRef = useRef(null)
-  const [artists, SetArtist] = useState('')
-  useEffect(() => {
-    if (audioRef.current && track.previewUrl) {
-      const artistsName = track.artists.map(artist => artist.name).join(', ')
-      SetArtist(artistsName)
-      audioRef.current.load() // Reloads new src
-      audioRef.current.play().catch(error => {
-        console.warn('Auto-play failed:', error)
-      })
-    }
-  }, [track])
+  const artistsName = track.artists?.map(artist => artist.name).join(', ') ?? ''
+
   return (
     <div className="audio-container">
       {/* Song Info */}
@@ -93,7 +82,7 @@ export const AudioPlayer = ({track, imgUrl}) => {
         <img src={imgUrl} alt="Album Art" className="album-image" />
         <div className="song-and-artist">
           <p className="song-title">{track.name}</p>
-          <p className="song-title">{artists}</p>
+          <p className="song-title">{artistsName}</p>
         </div>
       </div>
 
@@ -101,8 +90,8 @@ export const AudioPlayer = ({track, imgUrl}) => {
       <div className="audio-controls">
         {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
         <audio
-          ref={audioRef}
           controls
+          autoPlay
           src={track.previewUrl}
           className="audio-element"
         />
@@ -167,9 +156,10 @@ const PlaylistsDetails = ({match, history}) => {
       headers: {Authorization: `Bearer ${jwtToken}`},
     }
     const response = await fetch(url, options)
-    const rawData = await response.json()
-    const jsonData = convertKeysToCamelCase(rawData)
+    console.log(response)
     if (response.ok) {
+      const rawData = await response.json()
+      const jsonData = convertKeysToCamelCase(rawData)
       SetPlaylistData(jsonData)
       SetPlaylistApiStatus(apiStatus.success)
       console.log(jsonData)
@@ -295,7 +285,6 @@ const PlaylistsDetails = ({match, history}) => {
   useEffect(() => {
     makePlaylistApi()
   }, [])
-
   return (
     <div className="playlist-container">
       <SideBar />

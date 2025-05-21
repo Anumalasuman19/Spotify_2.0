@@ -10,7 +10,7 @@ import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
 
 const App = () => (
   <Switch>
-    <Route exact path="/Login" component={LoginPage} />
+    <Route exact path="/login" component={LoginPage} />
     <ProtectedRoute exact path="/" component={HomePage} />
     <ProtectedRoute exact path="/playlist/:id" component={PlaylistsDetails} />
     <ProtectedRoute exact path="/album/:id" component={AlbumDetails} />
