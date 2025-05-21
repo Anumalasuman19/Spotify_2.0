@@ -27,3 +27,40 @@
   width: 80%;
   margin-top: 24px;
 }
+@media (width: 360px) and (height: 640px) {
+  .sidebar-container {
+    width: 100%;
+    height: 8%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .spotify-logo {
+    width: 64px;
+    height: 24px;
+    margin: 0px;
+    padding-left: 24px;
+  }
+  .logout-icon {
+    width: 30px;
+    height: 28px;
+    margin: 0px;
+  }
+  .logout-button {
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    margin-right: 10px;
+    gap: 8px;
+  }
+  .logout-text {
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    color: #9b9b9b;
+    margin: 0px;
+    align-self: center;
+    margin-bottom: 0px;
+  }
+}

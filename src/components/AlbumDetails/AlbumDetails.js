@@ -1,4 +1,5 @@
 import {useState, useEffect} from 'react'
+import Cookies from 'js-cookie'
 import SideBar from '../SideBar/SideBar'
 import {
   PlaylistInfo,
@@ -71,15 +72,19 @@ const AlbumDetails = ({match, history}) => {
     console.log(newReleaseAlbumStatus)
     const {id} = match.params
     const url = `https://apis2.ccbp.in/spotify-clone/album-details/${id}`
-
-    try {
-      const response = await fetch(url)
-      const rawData = await response.json()
-      const jsonData = convertKeysToCamelCase(rawData)
+    const jwtToken = Cookies.get('jwt_token')
+    const options = {
+      method: 'GET',
+      headers: {Authorization: `Bearer ${jwtToken}`},
+    }
+    const response = await fetch(url, options)
+    const rawData = await response.json()
+    const jsonData = convertKeysToCamelCase(rawData)
+    if (response.ok) {
       SetNewReleaseAlbumData(jsonData)
       SetNewReleaseAlbumStatus(apiStatus.success)
       console.log(jsonData)
-    } catch {
+    } else {
       SetNewReleaseAlbumStatus(apiStatus.failure)
     }
   }
@@ -201,15 +206,6 @@ const AlbumDetails = ({match, history}) => {
   useEffect(() => {
     newReleaseAlbumPlaylistApiUrl()
   }, [])
-
-  useEffect(() => {
-    if (
-      newReleaseAlbumStatus === apiStatus.success &&
-      newReleaseAlbumData?.tracks?.items?.length > 0
-    ) {
-      SetCurrentPlayingAlbum(newReleaseAlbumData?.tracks?.items[0])
-    }
-  }, [newReleaseAlbumStatus, newReleaseAlbumData])
 
   return (
     <div className="playlist-container">

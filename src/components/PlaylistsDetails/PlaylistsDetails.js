@@ -1,4 +1,5 @@
 import {useEffect, useState, useRef} from 'react'
+import Cookies from 'js-cookie'
 import SideBar from '../SideBar/SideBar'
 import './PlaylistsDetails.css'
 
@@ -59,9 +60,9 @@ const PlaylistItemInfo = props => {
       className={`playlist-item-container ${containerStyle}`}
       onClick={onClickOfPlaylistItem}
     >
-      <p className="item-text">{songNumber}</p>
+      <p className="item-text no-display">{songNumber}</p>
       <p className="item-text">{track}</p>
-      <p className="item-text">{album}</p>
+      <p className="item-text no-display">{album}</p>
       <p className="item-text">{convertMillisToMinSec(duration)}</p>
       <p className="item-text">
         {artists.map(artist => artist.name).join(', ')}
@@ -160,15 +161,19 @@ const PlaylistsDetails = ({match, history}) => {
     SetPlaylistApiStatus(apiStatus.inprogress)
     const {id} = match.params
     const url = `https://apis2.ccbp.in/spotify-clone/playlists-details/${id}`
-
-    try {
-      const response = await fetch(url)
-      const rawData = await response.json()
-      const jsonData = convertKeysToCamelCase(rawData)
+    const jwtToken = Cookies.get('jwt_token')
+    const options = {
+      method: 'GET',
+      headers: {Authorization: `Bearer ${jwtToken}`},
+    }
+    const response = await fetch(url, options)
+    const rawData = await response.json()
+    const jsonData = convertKeysToCamelCase(rawData)
+    if (response.ok) {
       SetPlaylistData(jsonData)
       SetPlaylistApiStatus(apiStatus.success)
       console.log(jsonData)
-    } catch {
+    } else {
       SetPlaylistApiStatus(apiStatus.failure)
     }
   }
@@ -241,7 +246,7 @@ const PlaylistsDetails = ({match, history}) => {
                 featureName="Editor's picks"
                 description={playlistData.description}
               />
-              <div className="playlist-item-container">
+              <div className="playlist-item-container no-display">
                 <p className="item-text" style={{padding}}>
                   Track
                 </p>
@@ -289,17 +294,7 @@ const PlaylistsDetails = ({match, history}) => {
 
   useEffect(() => {
     makePlaylistApi()
-  }, [match.params.id])
-
-  useEffect(() => {
-    if (
-      playlistApiStatus === apiStatus.success &&
-      playlistData.tracks?.items?.length > 0
-    ) {
-      console.log(playlistData.tracks?.items[0].track)
-      SetCurrentSelectedTrack(playlistData.tracks.items[0].track)
-    }
-  }, [playlistApiStatus, playlistData])
+  }, [])
 
   return (
     <div className="playlist-container">

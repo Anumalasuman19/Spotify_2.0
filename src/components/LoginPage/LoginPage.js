@@ -79,36 +79,38 @@ const LoginPage = props => {
             />
             <h1 className="login-heading">Spotify Remix</h1>
           </div>
-          <div className="username-container">
-            <label htmlFor="login-username" className="input-field-label">
-              USERNAME
-            </label>
-            <input
-              id="login-username"
-              type="text"
-              className="login-input-field"
-              onChange={onUserNameChange}
-              value={userName}
-              required
-            />
+          <div className="username-password-container">
+            <div className="username-container">
+              <label htmlFor="login-username" className="input-field-label">
+                USERNAME
+              </label>
+              <input
+                id="login-username"
+                type="text"
+                className="login-input-field"
+                onChange={onUserNameChange}
+                value={userName}
+                required
+              />
+            </div>
+            <div className="username-container">
+              <label htmlFor="login-password" className="input-field-label">
+                PASSWORD
+              </label>
+              <input
+                id="login-password"
+                type="password"
+                className="login-input-field"
+                onChange={onPasswordChange}
+                value={password}
+                required
+              />
+            </div>
+            <button className="login-button" type="submit">
+              Login
+            </button>
+            <p className="error-message">{errorMessage}</p>
           </div>
-          <div className="username-container">
-            <label htmlFor="login-password" className="input-field-label">
-              PASSWORD
-            </label>
-            <input
-              id="login-password"
-              type="password"
-              className="login-input-field"
-              onChange={onPasswordChange}
-              value={password}
-              required
-            />
-          </div>
-          <button className="login-button" type="submit">
-            Login
-          </button>
-          <p className="error-message">{errorMessage}</p>
         </form>
       )}
     </div>

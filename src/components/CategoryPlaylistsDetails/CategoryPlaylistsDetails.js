@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useCallback} from 'react'
 import SideBar from '../SideBar/SideBar'
 import {apiStatus} from '../PlaylistsDetails/PlaylistsDetails'
 import './CategoryPlaylistsDetails.css'
@@ -20,7 +20,7 @@ const CategoryPlaylistsDetails = ({match, history}) => {
   const toCamelCase = str =>
     str.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase())
 
-  const convertKeysToCamelCase = obj => {
+  const convertKeysToCamelCase = useCallback(obj => {
     if (Array.isArray(obj)) {
       return obj.map(item => convertKeysToCamelCase(item))
     }
@@ -32,9 +32,9 @@ const CategoryPlaylistsDetails = ({match, history}) => {
       }, {})
     }
     return obj
-  }
+  }, [])
 
-  const categoryApiUrl = async () => {
+  const categoryApiUrl = useCallback(async () => {
     SetCategoryApiStatus(apiStatus.inprogress)
     console.log(categoryApiStatus)
     const {id} = match.params
@@ -50,7 +50,7 @@ const CategoryPlaylistsDetails = ({match, history}) => {
     } catch {
       SetCategoryApiStatus(apiStatus.failure)
     }
-  }
+  }, [match.params, convertKeysToCamelCase])
 
   const loadingView = () => (
     <div className="playlist-loader-or-failure-container">
@@ -129,7 +129,7 @@ const CategoryPlaylistsDetails = ({match, history}) => {
 
   useEffect(() => {
     categoryApiUrl()
-  }, [])
+  }, [categoryApiUrl])
 
   return (
     <div className="category-container">

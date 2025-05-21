@@ -7,10 +7,12 @@ export const FeatureItem = props => {
   const {imgUrl, name, id, section, altText} = props
   const pathUrl = section === 'editors' ? `/playlist/${id}` : `/album/${id}`
   return (
-    <Link className="playlist-item-Details" to={pathUrl}>
-      <img className="playlist-item-img" src={imgUrl} alt={altText} />
+    <li className="playlist-item-Details">
+      <Link to={pathUrl}>
+        <img className="playlist-item-img" src={imgUrl} alt={altText} />
+      </Link>
       <h2 className="playlist-item-name">{name}</h2>
-    </Link>
+    </li>
   )
 }
 
@@ -41,14 +43,16 @@ export const GenreMoodItem = ({name, imgUrl, index, id, altText}) => {
   const backgroundColor = colorPalette[index % colorPalette.length]
 
   return (
-    <Link
-      className="genre-mood-item"
-      style={{backgroundColor}}
-      to={`/category/${id}/playlists`}
-    >
-      <p className="genre-name">{name}</p>
-      <img className="genre-icon" src={imgUrl} alt={altText} />
-    </Link>
+    <li className="genre-mood-listitem">
+      <Link
+        className="genre-mood-item"
+        style={{backgroundColor}}
+        to={`/category/${id}/playlists`}
+      >
+        <p className="genre-name">{name}</p>
+        <img className="genre-icon" src={imgUrl} alt={altText} />
+      </Link>
+    </li>
   )
 }
 
@@ -60,7 +64,7 @@ const apiStatus = {
 }
 
 const HomePage = () => {
-  const [editorsPicksData, SetEditorsPicksData] = useState([])
+  const [editorsPicksData, SetEditorsPicksData] = useState()
   const [editorsPicksApiStatus, SetEditorsPicksApiStatus] = useState(
     apiStatus.initial,
   )
