@@ -1,16 +1,19 @@
 import {useState, useEffect, useCallback} from 'react'
+import {Link} from 'react-router-dom'
 import SideBar from '../SideBar/SideBar'
 import {apiStatus} from '../PlaylistsDetails/PlaylistsDetails'
 import './CategoryPlaylistsDetails.css'
 
 const CategoryItemDetails = props => {
-  const {imgUrl, name, totalTracks} = props
+  const {imgUrl, name, totalTracks, id} = props
   return (
-    <div className="category-item-details-container">
+    <Link className="category-item-details-container" to={`/playlist/${id}`}>
       <img src={imgUrl} alt="ns" className="category-img" />
-      <h2 className="name">{name}</h2>
-      <p className="total-tracks">{totalTracks} Tracks</p>
-    </div>
+      <div className="name-and-tracks">
+        <h2 className="name">{name}</h2>
+        <p className="total-tracks">{totalTracks} Tracks</p>
+      </div>
+    </Link>
   )
 }
 
@@ -20,7 +23,7 @@ const CategoryPlaylistsDetails = ({match, history}) => {
   const toCamelCase = str =>
     str.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase())
 
-  const convertKeysToCamelCase = useCallback(obj => {
+  const convertKeysToCamelCase = obj => {
     if (Array.isArray(obj)) {
       return obj.map(item => convertKeysToCamelCase(item))
     }
@@ -32,9 +35,9 @@ const CategoryPlaylistsDetails = ({match, history}) => {
       }, {})
     }
     return obj
-  }, [])
+  }
 
-  const categoryApiUrl = useCallback(async () => {
+  const categoryApiUrl = async () => {
     SetCategoryApiStatus(apiStatus.inprogress)
     console.log(categoryApiStatus)
     const {id} = match.params
@@ -50,7 +53,7 @@ const CategoryPlaylistsDetails = ({match, history}) => {
     } catch {
       SetCategoryApiStatus(apiStatus.failure)
     }
-  }, [match.params, convertKeysToCamelCase])
+  }
 
   const loadingView = () => (
     <div className="playlist-loader-or-failure-container">
@@ -105,6 +108,7 @@ const CategoryPlaylistsDetails = ({match, history}) => {
         console.log(categoryApiData.playlists.items)
         content = (
           <div className="category-content-container">
+            <p className="sub-heading podcast-text">Podcast</p>
             <ul className="category-list-container">
               {trackItems.map(item => (
                 <CategoryItemDetails
@@ -112,6 +116,7 @@ const CategoryPlaylistsDetails = ({match, history}) => {
                   imgUrl={item?.images[0]?.url}
                   name={item?.name}
                   totalTracks={item?.tracks.total}
+                  id={item?.id}
                 />
               ))}
             </ul>
@@ -129,7 +134,7 @@ const CategoryPlaylistsDetails = ({match, history}) => {
 
   useEffect(() => {
     categoryApiUrl()
-  }, [categoryApiUrl])
+  }, [])
 
   return (
     <div className="category-container">

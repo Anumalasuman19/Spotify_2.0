@@ -1,4 +1,4 @@
-import {useEffect, useState, useRef} from 'react'
+import {useEffect, useState} from 'react'
 import Cookies from 'js-cookie'
 import SideBar from '../SideBar/SideBar'
 import './PlaylistsDetails.css'
@@ -59,15 +59,24 @@ const PlaylistItemInfo = props => {
       className={`playlist-item-container ${containerStyle}`}
       onClick={onClickOfPlaylistItem}
     >
-      <p className="item-text no-display">{songNumber}</p>
-      <p className="item-text">{track}</p>
-      <p className="item-text no-display">{album}</p>
-      <p className="item-text">{convertMillisToMinSec(duration)}</p>
-      <p className="item-text">
+      <div className="track-and-artists">
+        <p className="item-text track-text">{track}</p>
+        <p className="item-text artists-text">
+          {artists.map(artist => artist.name).join(', ')}
+        </p>
+      </div>
+      <p className="item-text no-display song-number">{songNumber}</p>
+      <p className="item-text track-text no-display">{track}</p>
+      <p className="item-text album-text no-display">{album}</p>
+      <p className="item-text duration-text">
+        {convertMillisToMinSec(duration)}
+      </p>
+      <p className="item-text artists-text no-display">
         {artists.map(artist => artist.name).join(', ')}
       </p>
-
-      <p className="item-text">{getTimeAgo(addedDuration)}</p>
+      <p className="item-text added-duration no-display">
+        {getTimeAgo(addedDuration)}
+      </p>
     </li>
   )
 }
@@ -237,15 +246,15 @@ const PlaylistsDetails = ({match, history}) => {
                 description={playlistData.description}
               />
               <div className="playlist-item-container no-display">
-                <p className="item-text" style={{padding}}>
+                <p className="item-text track-text" style={{padding}}>
                   Track
                 </p>
-                <p className="item-text">Album</p>
-                <p className="item-text">Time</p>
-                <p className="item-text">Artist</p>
-                <p className="item-text">Added</p>
+                <p className="item-text album-text">Album</p>
+                <p className="item-text duration-text">Time</p>
+                <p className="item-text artists-text">Artist</p>
+                <p className="item-text added-duration">Added</p>
               </div>
-              <hr className="horizontal-line-style" />
+              <hr className="horizontal-line-style no-display" />
               <ul className="playlist-list">
                 {trackItems.map((item, index) => (
                   <PlaylistItemInfo

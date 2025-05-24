@@ -28,6 +28,7 @@
   font-weight: 600;
   color: #ffffff;
   margin: 0px;
+  text-align: center;
 }
 .artists-names {
   font-size: 16px;
@@ -41,67 +42,38 @@
   height: 41px;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   padding: 0px 32px;
+  gap: 20px;
   color: #ffffff;
-  margin-top: 24px;
-}
-
-.playlist-item-container p {
-  margin: 0;
-  font-size: 16px;
-  font-weight: 500;
-  color: #ffffff;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 .playlist-selected-item-container {
   background-color: #303030;
 }
-.playlist-item-container > p:nth-child(1) {
-  /* Track Number */
-  width: 40px;
-  flex-shrink: 0;
+.song-number {
+  flex-shrink: 1;
+}
+.track-text {
+  flex-grow: 0.5;
   text-align: left;
 }
-
-.playlist-item-container > p:nth-child(2) {
-  /* Track Name */
-  flex: 2;
+.album-text {
+  flex-grow: 1;
+  text-align: left;
 }
-
-.playlist-item-container > p:nth-child(3) {
-  /* Album */
-  flex: 2;
+.duration-text {
+  flex-shrink: 1;
+  text-align: left;
 }
-
-.playlist-item-container > p:nth-child(4) {
-  /* Time */
-  width: 60px;
-  flex-shrink: 0;
+.added-duration {
+  flex-shrink: 1;
+  text-align: left;
 }
-
-.playlist-item-container > p:nth-child(5) {
-  /* Artist */
-  flex: 1.5;
+.artists-text {
+  flex-grow: 1;
+  text-align: left;
 }
-
-.playlist-item-container > p:nth-child(6) {
-  /* Added */
-  flex: 1;
-  text-align: right;
-}
-
-.playlist-item-text-container {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 175px;
-}
-
 .playlist-container {
   width: 100%;
   height: 100vh;
@@ -263,7 +235,9 @@
   width: 100%;
   height: 100%;
 }
-
+.track-and-artists {
+  display: none;
+}
 @media (width: 360px) and (height: 640px) {
   .playlist-info-container {
     width: 100%;
@@ -283,6 +257,7 @@
     display: flex;
     flex-direction: column;
     gap: 4px;
+    align-self: center;
   }
   .feature-name {
     display: none;
@@ -300,9 +275,47 @@
 
   .playlist-item-container {
     width: 100%;
+    height: 44px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 24px;
+    color: #ffffff;
+  }
+  .playlist-selected-item-container {
+    background-color: #303030;
+  }
+  .track-and-artists {
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    flex-grow: 1;
+  }
+
+  .track-text {
+    height: 21px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    order: 0;
+    margin: 0px;
+  }
+  .duration-text {
+    font-size: 12px;
+    font-weight: 600;
+    color: #9b9b9b;
+    order: 2;
+    margin: 0px;
+  }
+  .artists-text {
+    height: 16px;
+    font-size: 12px;
+    font-weight: 600;
+    color: hsl(0, 0%, 61%);
+    order: 0;
+    margin: 0px;
   }
 
   .playlist-container {
@@ -346,5 +359,13 @@
   }
   .no-display {
     display: none;
+  }
+  .playlist-list {
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
   }
 }

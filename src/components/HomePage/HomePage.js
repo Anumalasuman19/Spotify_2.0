@@ -8,7 +8,7 @@ export const FeatureItem = props => {
   const pathUrl = section === 'editors' ? `/playlist/${id}` : `/album/${id}`
   return (
     <li className="playlist-item-Details">
-      <Link to={pathUrl}>
+      <Link to={pathUrl} className="link-container">
         <img className="playlist-item-img" src={imgUrl} alt={altText} />
       </Link>
       <h2 className="playlist-item-name">{name}</h2>
