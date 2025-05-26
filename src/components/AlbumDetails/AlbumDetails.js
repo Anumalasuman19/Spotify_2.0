@@ -36,10 +36,12 @@ const AlbumItemInfo = props => {
       className={`album-item-container ${containerStyle}`}
       onClick={onClickOfAlbumItem}
     >
-      <p className="item-text">{songNumber}</p>
-      <p className="item-text">{track}</p>
-      <p className="item-text">{convertMillisToMinSec(duration)}</p>
-      <p className="item-text">{artistsNames}</p>
+      <p className="item-text track-number">{songNumber}</p>
+      <p className="item-text track">{track}</p>
+      <p className="item-text song-duration">
+        {convertMillisToMinSec(duration)}
+      </p>
+      <p className="item-text artists-names">{artistsNames}</p>
     </li>
   )
 }
@@ -158,14 +160,14 @@ const AlbumDetails = ({match, history}) => {
               <PlaylistInfo
                 imgUrl={imageUrl}
                 playlistName={newReleaseAlbumData.name}
-                featureName="newRelease"
+                featureName="New Releases"
               />
               <div className="album-titles-and-album-list">
                 <div className="album-item-container">
-                  <p className="item-text">#</p>
-                  <p className="item-text">Track</p>
-                  <p className="item-text">Time</p>
-                  <p className="item-text">Artist</p>
+                  <p className="item-text track-number">#</p>
+                  <p className="item-text track">Track</p>
+                  <p className="item-text song-duration">Time</p>
+                  <p className="item-text artists-names">Artist</p>
                 </div>
                 <hr className="horizontal-line-style" />
                 <ul className="album-list">

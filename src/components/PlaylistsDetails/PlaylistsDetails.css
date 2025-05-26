@@ -41,37 +41,34 @@
   width: 100%;
   height: 41px;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
   align-items: center;
   padding: 0px 32px;
-  gap: 20px;
   color: #ffffff;
 }
 .playlist-selected-item-container {
   background-color: #303030;
 }
 .song-number {
-  flex-shrink: 1;
+  width: 5%;
 }
 .track-text {
-  flex-grow: 0.5;
+  width: 20%;
   text-align: left;
 }
 .album-text {
-  flex-grow: 1;
+  width: 25%;
   text-align: left;
 }
 .duration-text {
-  flex-shrink: 1;
+  width: 10%;
   text-align: left;
 }
 .added-duration {
-  flex-shrink: 1;
+  width: 10%;
   text-align: left;
 }
 .artists-text {
-  flex-grow: 1;
+  width: 30%;
   text-align: left;
 }
 .playlist-container {

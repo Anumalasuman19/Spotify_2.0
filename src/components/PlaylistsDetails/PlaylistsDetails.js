@@ -220,7 +220,7 @@ const PlaylistsDetails = ({match, history}) => {
   }
 
   const renderSection = () => {
-    const padding = '60px'
+    const padding = ''
     let content
     switch (playlistApiStatus) {
       case apiStatus.inprogress:
@@ -246,9 +246,8 @@ const PlaylistsDetails = ({match, history}) => {
                 description={playlistData.description}
               />
               <div className="playlist-item-container no-display">
-                <p className="item-text track-text" style={{padding}}>
-                  Track
-                </p>
+                <p className="item-text song-number">{padding}</p>
+                <p className="item-text track-text">Track</p>
                 <p className="item-text album-text">Album</p>
                 <p className="item-text duration-text">Time</p>
                 <p className="item-text artists-text">Artist</p>

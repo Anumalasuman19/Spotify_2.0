@@ -20,6 +20,7 @@ const LoginPage = props => {
 
   const onLoginSuccess = jwtToken => {
     console.log(jwtToken)
+    SetLoader(true)
     Cookies.set('jwt_token', jwtToken, {
       expires: 30,
       path: '/',
@@ -30,12 +31,10 @@ const LoginPage = props => {
 
   const onLoginSubmit = async event => {
     event.preventDefault()
-    SetLoader(true)
     const userFilledDetails = {
       username: userName,
       password,
     }
-    console.log(userFilledDetails)
     const url = 'https://apis.ccbp.in/login'
     const options = {
       method: 'POST',
@@ -49,8 +48,6 @@ const LoginPage = props => {
       onLoginSuccess(jsonResponse.jwt_token)
     } else {
       SetLoader(false)
-      SetUserName('')
-      SetPassword('')
       SetErrorMessage(jsonResponse.error_msg)
     }
   }
