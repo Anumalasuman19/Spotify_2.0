@@ -77,7 +77,7 @@ const LoginPage = props => {
             <h1 className="login-heading">Spotify Remix</h1>
           </div>
           <div className="username-password-container">
-            <div className="username-container">
+            <div className="input-field-container">
               <label htmlFor="login-username" className="input-field-label">
                 USERNAME
               </label>
@@ -90,7 +90,7 @@ const LoginPage = props => {
                 required
               />
             </div>
-            <div className="username-container">
+            <div className="input-field-container">
               <label htmlFor="login-password" className="input-field-label">
                 PASSWORD
               </label>

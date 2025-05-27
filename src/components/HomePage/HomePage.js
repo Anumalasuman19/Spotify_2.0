@@ -43,12 +43,8 @@ export const GenreMoodItem = ({name, imgUrl, index, id, altText}) => {
   const backgroundColor = colorPalette[index % colorPalette.length]
 
   return (
-    <li className="genre-mood-listitem">
-      <Link
-        className="genre-mood-item"
-        style={{backgroundColor}}
-        to={`/category/${id}/playlists`}
-      >
+    <li className="genre-mood-item" style={{backgroundColor}}>
+      <Link to={`/category/${id}/playlists`} className="genre-mood-link">
         <p className="genre-name">{name}</p>
         <img className="genre-icon" src={imgUrl} alt={altText} />
       </Link>

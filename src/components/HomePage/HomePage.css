@@ -1,18 +1,17 @@
 .playlist-item-Details {
-  width: 12%;
-  height: 203px;
+  width: 10.3%;
   list-style-type: none;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 16px;
+  text-align: center;
   margin-bottom: 40px;
-
   text-decoration: none;
 }
 .playlist-item-img {
-  width: 100%;
-  height: 100%;
+  width: 166px;
+  height: 166px;
   border-radius: 8px;
 }
 
@@ -23,35 +22,29 @@
   text-align: center;
   text-decoration: none;
   margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 .home-page-container {
-  width: 100%;
   height: 100vh;
   background-color: #181818;
   display: flex;
 }
 .playlist-categories-newrelease-container {
-  width: 92%;
-  height: 100%;
-  flex-grow: 1;
-  justify-self: flex-end;
-  padding-top: 96px;
-  padding-bottom: 96px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   padding-left: 32px;
   padding-right: 74px;
+  padding-top: 96px;
+  padding-bottom: 96px;
   overflow: auto;
   gap: 64px;
 }
 
 .editorsPicks-container {
-  width: 100%;
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
   gap: 32px;
 }
 
@@ -63,7 +56,6 @@
 }
 
 .editorsPicks-list {
-  width: 100%;
   display: flex;
   flex-wrap: wrap;
   gap: 48px;
@@ -113,24 +105,23 @@
   border: 0px;
 }
 
-.genre-mood-listitem {
-  width: 12%;
-  height: 166px;
-  list-style-type: none;
-}
 .genre-mood-item {
-  width: 100%;
-  height: 100%;
+  width: 10.3%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: flex-start;
   border-radius: 8px;
   text-decoration: none;
   padding-left: 12px;
   overflow: hidden;
+  list-style-type: none;
 }
-
+.genre-mood-link {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-decoration: none;
+}
 .genre-name {
   color: #f8fafc;
   font-size: 20px;
@@ -138,26 +129,27 @@
 }
 
 .genre-icon {
-  width: 100px;
-  height: 100px;
   align-self: flex-end;
   justify-content: flex-end;
+  width: 100px;
+  height: 100px;
+  transform: translateX(10px) rotate(12.13deg);
 }
 
-@media (width: 360px) and (height: 640px) {
+@media (max-width: 480px) {
   .playlist-item-Details {
     width: 25%;
-    height: 106px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 8px;
     margin-bottom: 16px;
     text-decoration: none;
+    border: 1px solid green;
   }
   .playlist-item-img {
-    width: 100%;
-    height: 80%;
+    width: 82px;
+    height: 82px;
     border-radius: 4px;
   }
 
@@ -170,8 +162,6 @@
     flex-direction: column;
   }
   .playlist-categories-newrelease-container {
-    width: 100%;
-    height: 92%;
     padding-top: 32px;
     padding-bottom: 30px;
     display: flex;
@@ -185,42 +175,42 @@
   }
 
   .editorsPicks-container {
-    width: 100%;
     gap: 24px;
     margin: 0px 0px;
     padding-left: 24px;
-    flex-grow: 1;
   }
 
   .editorsPicks-list {
-    width: 100%;
     display: flex;
     flex-wrap: wrap;
     gap: 30px;
     padding: 0px;
     margin: 0px;
   }
-  .genre-mood-listitem {
-    width: 25%;
-    height: 82px;
-  }
   .genre-mood-item {
-    width: 100%;
-    height: 100%;
+    width: 25%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
+    justify-content: stretch;
     border-radius: 8px;
     text-decoration: none;
     padding-left: 12px;
     overflow: hidden;
+    border: 1px solid green;
   }
-
+  .genre-mood-link {
+    display: flex;
+    justify-self: stretch;
+    flex-direction: column;
+    justify-content: space-between;
+    text-decoration: none;
+    border: 1px solid green;
+  }
   .genre-name {
     color: #f8fafc;
     font-size: 12px;
     font-weight: 700;
+    border: 1px solid green;
   }
 
   .genre-icon {
@@ -228,5 +218,6 @@
     height: 50px;
     align-self: flex-end;
     justify-content: flex-end;
+    border: 1px solid green;
   }
 }
