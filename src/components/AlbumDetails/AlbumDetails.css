@@ -1,11 +1,12 @@
 .album-item-container {
-  width: 100%;
-  height: 41px;
   display: flex;
   align-items: center;
   padding: 0px 32px;
   color: #ffffff;
   margin: 0px;
+}
+.track-and-artists {
+  display: none;
 }
 .track-number {
   width: 5%;
@@ -20,25 +21,50 @@
   width: 30%;
 }
 .current-song-container {
-  width: 100%;
   justify-self: flex-end;
 }
 .album-list {
   padding: 0px;
-  margin: 0px;
 }
 .back-and-album-container {
   width: 100%;
   display: flex;
   flex-direction: column;
 }
-.horizontal-line {
-  width: 100%;
-}
+
 .album-titles-and-album-list {
   margin-top: 24px;
-  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 12px;
+}
+@media (max-width: 425px) {
+  .album-no-display {
+    display: none;
+  }
+  .album-item-container {
+    justify-content: space-between;
+    padding: 0px 24px;
+    border: 1px solid green;
+    gap: 12px;
+  }
+  .track-and-artists {
+    width: 88%;
+    display: flex;
+    flex-direction: column;
+  }
+  .track {
+    width: 100%;
+    margin: 0px;
+    border: 1px solid green;
+  }
+  .song-duration {
+    width: 10%;
+    border: 1px solid green;
+  }
+  .artists-names {
+    width: 100%;
+    margin: 0px;
+    border: 1px solid green;
+  }
 }

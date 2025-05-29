@@ -59,7 +59,7 @@
   margin: 0px;
   margin-left: 34px;
 }
-@media (width: 360px) and (height: 640px) {
+@media (max-width: 425px) {
   .category-item-details-container {
     width: 80%;
     height: 84px;

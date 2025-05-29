@@ -1,6 +1,4 @@
 .sidebar-container {
-  width: 8%;
-  height: 100%;
   background-color: #040306;
   display: flex;
   flex-direction: column;
@@ -14,7 +12,6 @@
   margin-bottom: 24px;
 }
 .logout-icon {
-  width: 100%;
 }
 .logout-text {
   font-size: 12px;
@@ -24,10 +21,9 @@
   margin: 0px;
 }
 .spotify-logo {
-  width: 80%;
   margin-top: 24px;
 }
-@media (width: 360px) and (height: 640px) {
+@media (max-width: 425px) {
   .sidebar-container {
     width: 100%;
     height: 8%;

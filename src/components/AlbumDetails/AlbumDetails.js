@@ -36,12 +36,16 @@ const AlbumItemInfo = props => {
       className={`album-item-container ${containerStyle}`}
       onClick={onClickOfAlbumItem}
     >
-      <p className="item-text track-number">{songNumber}</p>
-      <p className="item-text track">{track}</p>
+      <div className="track-and-artists">
+        <p className="item-text track">{track}</p>
+        <p className="item-text artists-names">{artistsNames}</p>
+      </div>
+      <p className="item-text track-number album-no-display">{songNumber}</p>
+      <p className="item-text track album-no-display">{track}</p>
       <p className="item-text song-duration">
         {convertMillisToMinSec(duration)}
       </p>
-      <p className="item-text artists-names">{artistsNames}</p>
+      <p className="item-text artists-names album-no-display">{artistsNames}</p>
     </li>
   )
 }
@@ -163,7 +167,7 @@ const AlbumDetails = ({match, history}) => {
                 featureName="New Releases"
               />
               <div className="album-titles-and-album-list">
-                <div className="album-item-container">
+                <div className="album-item-container album-no-display">
                   <p className="item-text track-number">#</p>
                   <p className="item-text track">Track</p>
                   <p className="item-text song-duration">Time</p>

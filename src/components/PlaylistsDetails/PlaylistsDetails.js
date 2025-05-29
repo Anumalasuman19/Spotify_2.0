@@ -105,20 +105,6 @@ export const AudioPlayer = ({track, imgUrl}) => {
           className="audio-element"
         />
       </div>
-
-      {/* Volume Control */}
-      <div className="volume-control">
-        <span role="img" aria-label="volume">
-          🔊
-        </span>
-        <input
-          type="range"
-          min="0"
-          max="100"
-          defaultValue="70"
-          className="volume-slider"
-        />
-      </div>
     </div>
   )
 }
@@ -272,7 +258,7 @@ const PlaylistsDetails = ({match, history}) => {
               </ul>
             </div>
             <div>
-              <hr />
+              <hr className="horizontal-line-style" />
               <AudioPlayer
                 track={currentSelectedTrack}
                 imgUrl={currentSelectedTrack?.album?.images[0].url}

@@ -1,10 +1,9 @@
 .playlist-info-container {
-  width: 100%;
-  height: 295px;
   display: flex;
   gap: 24px;
   margin-left: 32px;
   margin-bottom: 32px;
+  padding: 10px 0px;
 }
 .playlist-img {
   width: 295px;
@@ -12,7 +11,6 @@
   border-radius: 8px;
 }
 .info {
-  height: 50%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -39,8 +37,6 @@
 }
 
 .playlist-item-container {
-  width: 100%;
-  height: 41px;
   display: flex;
   align-items: center;
   padding: 0px 32px;
@@ -73,7 +69,6 @@
   text-align: left;
 }
 .playlist-container {
-  width: 100%;
   height: 100vh;
   background-color: #181818;
   display: flex;
@@ -81,29 +76,35 @@
 }
 
 .playlist-content-wrapper {
-  width: 92%;
-  height: 100%;
-  flex-grow: 2;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
   overflow-y: auto;
 }
-
+.playlist-and-details-container {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  justify-self: stretch;
+  flex-grow: 1;
+}
 .playlist-content-container {
-  width: 100%;
-  height: 100vh;
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 24px;
   margin: 0px;
 }
+
 .back-and-playlist-container {
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
 .back-button {
-  width: 68px;
-  height: 24px;
   background-color: transparent;
   border: 0px;
   margin-top: 24px;
@@ -113,6 +114,7 @@
   gap: 4px;
   justify-content: center;
 }
+
 .back-text {
   font-size: 16px;
   font-weight: 600;
@@ -121,7 +123,6 @@
   margin-top: 2px;
 }
 .playlist-items-heading {
-  width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -129,6 +130,7 @@
   padding-left: 57px;
 }
 .item-text {
+  padding-right: 12px;
   font-size: 16px;
   font-weight: 600;
   color: #f8fafc;
@@ -140,12 +142,11 @@
   padding: 0px;
 }
 .horizontal-line-style {
-  width: 98%;
   margin: 0px;
+  border: none;
+  border-top: 1px solid #475569;
 }
 .audio-container {
-  width: 100%;
-  height: 108px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -153,6 +154,7 @@
   background-color: #181818;
   padding: 24px;
   align-self: flex-end;
+  justify-content: flex-end;
 }
 
 .song-info {
@@ -198,7 +200,6 @@
   width: 100%;
   max-width: 400px;
   height: 30px;
-
   outline: none;
 }
 
@@ -210,11 +211,6 @@
   justify-content: flex-end;
 }
 
-.volume-slider {
-  width: 80px;
-  height: 2px;
-  accent-color: #1db954; /* Spotify green */
-}
 .playlist-loader-or-failure-container {
   width: 96%;
   height: 92%;
@@ -229,25 +225,21 @@
   gap: 16px;
   flex-grow: 1;
 }
-.playlist-and-details-container {
-  width: 100%;
-  height: 100%;
-}
+
 .track-and-artists {
   display: none;
 }
-@media (max-width: 480px) {
+@media (max-width: 425px) {
   .playlist-info-container {
-    width: 100%;
-    height: 220px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 8px;
     margin: 0px;
+    border: 1px solid green;
   }
   .playlist-img {
-    width: 40%;
+    width: 150px;
     height: 150px;
     border-radius: 4px;
   }
@@ -261,6 +253,7 @@
     display: none;
   }
   .playlist-name {
+    padding: 0px 10px;
     font-size: 32px;
     margin: 0px;
   }
@@ -273,32 +266,32 @@
 
   .playlist-item-container {
     width: 100%;
-    height: 44px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 0px 24px;
+    padding: 3px 24px;
     color: #ffffff;
   }
   .playlist-selected-item-container {
     background-color: #303030;
   }
   .track-and-artists {
-    height: 100%;
+    width: 95%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    flex-grow: 1;
+    border: 1px solid green;
   }
 
   .track-text {
-    height: 21px;
+    width: 100%;
     font-size: 16px;
     font-weight: 600;
     color: #ffffff;
     order: 0;
     margin: 0px;
+    align-self: stretch;
   }
   .duration-text {
     font-size: 12px;
@@ -308,33 +301,29 @@
     margin: 0px;
   }
   .artists-text {
-    height: 16px;
+    width: 100%;
     font-size: 12px;
     font-weight: 600;
     color: hsl(0, 0%, 61%);
     order: 0;
     margin: 0px;
+    line-height: 16px;
   }
 
   .playlist-container {
     display: flex;
     flex-direction: column;
   }
-  .playlist-content-wrapper {
-    width: 100%;
-    height: 92%;
-    border: 1px solid blue;
-  }
+
   .side-bar-container {
     display: none;
   }
   .playlist-content-container {
-    width: 100%;
-    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     margin: 0px;
+    border: 1px solid green;
   }
   .back-button {
     width: 58px;

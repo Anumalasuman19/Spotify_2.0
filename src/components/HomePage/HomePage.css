@@ -6,7 +6,6 @@
   align-items: center;
   gap: 16px;
   text-align: center;
-  margin-bottom: 40px;
   text-decoration: none;
 }
 .playlist-item-img {
@@ -136,7 +135,7 @@
   transform: translateX(10px) rotate(12.13deg);
 }
 
-@media (max-width: 480px) {
+@media (max-width: 425px) {
   .playlist-item-Details {
     width: 25%;
     display: flex;
@@ -148,8 +147,8 @@
     border: 1px solid green;
   }
   .playlist-item-img {
-    width: 82px;
-    height: 82px;
+    width: 100%;
+    height: 99%;
     border-radius: 4px;
   }
 
@@ -189,9 +188,6 @@
   }
   .genre-mood-item {
     width: 25%;
-    display: flex;
-    flex-direction: column;
-    justify-content: stretch;
     border-radius: 8px;
     text-decoration: none;
     padding-left: 12px;
@@ -199,8 +195,8 @@
     border: 1px solid green;
   }
   .genre-mood-link {
+    height: 100%;
     display: flex;
-    justify-self: stretch;
     flex-direction: column;
     justify-content: space-between;
     text-decoration: none;
