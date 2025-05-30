@@ -26,7 +26,6 @@
   align-items: center;
   gap: 16px;
   margin-bottom: 16px;
-  border: 1px solid green;
 }
 
 .login-heading {
@@ -44,14 +43,12 @@
 .username-password-container {
   display: flex;
   flex-direction: column;
-  border: 1px solid green;
 }
 .input-field-container {
   display: flex;
   flex-direction: column;
   gap: 8px;
   margin-bottom: 16px;
-  border: 1px solid green;
 }
 
 .input-field-label {
@@ -111,7 +108,9 @@
     padding: 36px 47px;
     border-radius: 8px;
   }
-
+  .logo-and-heading {
+    margin-bottom: 20px;
+  }
   .login-heading {
     font-size: 28px;
     margin: 0px;
@@ -121,7 +120,6 @@
     width: 100px;
     height: 42px;
     margin: 0px 47px;
-    border: 1px solid green;
   }
   .input-field-container-container {
     margin-bottom: 8px;

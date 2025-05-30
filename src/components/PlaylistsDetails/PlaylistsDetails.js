@@ -91,7 +91,7 @@ export const AudioPlayer = ({track, imgUrl}) => {
         <img src={imgUrl} alt="Album Art" className="album-image" />
         <div className="song-and-artist">
           <p className="song-title">{track.name}</p>
-          <p className="song-title">{artistsName}</p>
+          <p className="artist-name">{artistsName}</p>
         </div>
       </div>
 
@@ -121,7 +121,7 @@ const PlaylistsDetails = ({match, history}) => {
   const [playlistData, SetPlaylistData] = useState({})
   const [currentSelectedTrack, SetCurrentSelectedTrack] = useState({})
   const onClickOfBack = () => {
-    history.push('/')
+    history.goBack()
   }
 
   const toCamelCase = str =>
@@ -257,13 +257,6 @@ const PlaylistsDetails = ({match, history}) => {
                 ))}
               </ul>
             </div>
-            <div>
-              <hr className="horizontal-line-style" />
-              <AudioPlayer
-                track={currentSelectedTrack}
-                imgUrl={currentSelectedTrack?.album?.images[0].url}
-              />
-            </div>
           </div>
         )
         break
@@ -272,7 +265,6 @@ const PlaylistsDetails = ({match, history}) => {
       default:
         content = null
     }
-
     return <div className="playlist-and-details-container">{content}</div>
   }
 
@@ -281,7 +273,9 @@ const PlaylistsDetails = ({match, history}) => {
   }, [])
   return (
     <div className="playlist-container">
-      <SideBar />
+      <div className="playlist-sidebar-container">
+        <SideBar />
+      </div>
       <div className="playlist-content-wrapper">
         <button type="button" className="back-button" onClick={onClickOfBack}>
           <img
@@ -291,7 +285,17 @@ const PlaylistsDetails = ({match, history}) => {
           <p className="back-text">Back</p>
         </button>
         {renderSection()}
-        <p className="playlist-description">{playlistData.description}</p>
+        {playlistApiStatus === apiStatus.success ? (
+          <div>
+            <hr className="horizontal-line-style" />
+            <AudioPlayer
+              track={currentSelectedTrack}
+              imgUrl={currentSelectedTrack?.album?.images[0].url}
+            />
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   )

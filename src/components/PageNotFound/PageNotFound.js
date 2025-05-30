@@ -7,7 +7,9 @@ const PageNotFound = ({history}) => {
   }
   return (
     <div className="page-not-found-container">
-      <SideBar />
+      <div className="playlist-sidebar-container">
+        <SideBar />
+      </div>
       <div className="page-not-found-content">
         <button type="button" className="back-button" onClick={onClickOfBack}>
           <img
@@ -17,9 +19,12 @@ const PageNotFound = ({history}) => {
           <p className="back-text">Back</p>
         </button>
         <div className="heading-and-text">
-          <h1 className="page-not-found-heading">404</h1>
+          <img
+            src="https://res.cloudinary.com/dzki1pesn/image/upload/v1748606290/404_img_esq8yq.png"
+            alt="page not found"
+            className="page-not-found-img"
+          />
           <h1 className="page-not-found-text">PAGE NOT FOUND</h1>
-          <img alt="page not found" />
           <button type="button" onClick={onClickOfBack}>
             Home Page
           </button>

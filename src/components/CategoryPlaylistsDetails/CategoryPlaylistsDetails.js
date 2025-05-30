@@ -138,7 +138,9 @@ const CategoryPlaylistsDetails = ({match, history}) => {
 
   return (
     <div className="category-container">
-      <SideBar />
+      <div className="playlist-sidebar-container">
+        <SideBar />
+      </div>
       <div className="playlist-content-wrapper">
         <button type="button" className="back-button" onClick={onClickOfBack}>
           <img

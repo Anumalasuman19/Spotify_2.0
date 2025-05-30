@@ -173,7 +173,7 @@ const AlbumDetails = ({match, history}) => {
                   <p className="item-text song-duration">Time</p>
                   <p className="item-text artists-names">Artist</p>
                 </div>
-                <hr className="horizontal-line-style" />
+                <hr className="horizontal-line-style album-no-display" />
                 <ul className="album-list">
                   {trackItems.map((item, index) => (
                     <AlbumItemInfo
@@ -189,13 +189,6 @@ const AlbumDetails = ({match, history}) => {
                   ))}
                 </ul>
               </div>
-            </div>
-            <div className="current-song-container">
-              <hr />
-              <AudioPlayer
-                track={currentPlayingAlbum}
-                imgUrl={newReleaseAlbumData.images[0].url}
-              />
             </div>
           </div>
         )
@@ -215,7 +208,9 @@ const AlbumDetails = ({match, history}) => {
 
   return (
     <div className="playlist-container">
-      <SideBar />
+      <div className="playlist-sidebar-container">
+        <SideBar />
+      </div>
       <div className="playlist-content-wrapper">
         <button type="button" className="back-button" onClick={onClickOfBack}>
           <img
@@ -225,6 +220,17 @@ const AlbumDetails = ({match, history}) => {
           <p className="back-text">Back</p>
         </button>
         {renderSection()}
+        {newReleaseAlbumStatus === apiStatus.success ? (
+          <div className="current-song-container">
+            <hr className="horizontal-line-style" />
+            <AudioPlayer
+              track={currentPlayingAlbum}
+              imgUrl={newReleaseAlbumData.images[0].url}
+            />
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   )

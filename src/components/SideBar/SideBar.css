@@ -5,13 +5,17 @@
   justify-content: space-between;
   align-items: center;
   flex-shrink: 0;
+  padding: 0px 8px;
+  padding-top: 24px;
+  padding-bottom: 30px;
 }
 .logout-button {
   background-color: transparent;
   border: 0px;
-  margin-bottom: 24px;
 }
 .logout-icon {
+  width: 36px;
+  height: 36px;
 }
 .logout-text {
   font-size: 12px;
@@ -21,22 +25,22 @@
   margin: 0px;
 }
 .spotify-logo {
-  margin-top: 24px;
+  width: 82px;
+  height: 33px;
 }
 @media (max-width: 425px) {
   .sidebar-container {
-    width: 100%;
-    height: 8%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    padding: 0px;
+    padding: 16px 24px;
   }
   .spotify-logo {
     width: 64px;
     height: 24px;
     margin: 0px;
-    padding-left: 24px;
   }
   .logout-icon {
     width: 30px;
@@ -47,7 +51,6 @@
     margin: 0px;
     padding: 0px;
     display: flex;
-    margin-right: 10px;
     gap: 8px;
   }
   .logout-text {

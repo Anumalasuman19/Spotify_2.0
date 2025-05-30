@@ -33,10 +33,9 @@
 }
 
 .album-titles-and-album-list {
-  margin-top: 24px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
 }
 @media (max-width: 425px) {
   .album-no-display {
@@ -45,8 +44,12 @@
   .album-item-container {
     justify-content: space-between;
     padding: 0px 24px;
-    border: 1px solid green;
     gap: 12px;
+  }
+  .album-titles-and-album-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
   }
   .track-and-artists {
     width: 88%;
@@ -56,15 +59,12 @@
   .track {
     width: 100%;
     margin: 0px;
-    border: 1px solid green;
   }
   .song-duration {
     width: 10%;
-    border: 1px solid green;
   }
   .artists-names {
     width: 100%;
     margin: 0px;
-    border: 1px solid green;
   }
 }

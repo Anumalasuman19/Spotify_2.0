@@ -9,8 +9,7 @@
   text-decoration: none;
 }
 .playlist-item-img {
-  width: 166px;
-  height: 166px;
+  width: 100%;
   border-radius: 8px;
 }
 
@@ -30,6 +29,7 @@
   display: flex;
 }
 .playlist-categories-newrelease-container {
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -37,7 +37,7 @@
   padding-right: 74px;
   padding-top: 96px;
   padding-bottom: 96px;
-  overflow: auto;
+  overflow-y: auto;
   gap: 64px;
 }
 
@@ -59,11 +59,10 @@
   flex-wrap: wrap;
   gap: 48px;
   padding: 0px;
+  padding-right: 70px;
   margin: 0px;
 }
 .loader-or-failure-container {
-  width: 80%;
-  height: 100%;
   background-color: #040306;
   border-radius: 8px;
   display: flex;
@@ -71,7 +70,7 @@
   justify-content: center;
   align-items: center;
   gap: 16px;
-  flex-grow: 1;
+  padding: 162px 493px;
 }
 
 .spotify-icon {
@@ -105,10 +104,7 @@
 }
 
 .genre-mood-item {
-  width: 10.3%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  width: 11%;
   border-radius: 8px;
   text-decoration: none;
   padding-left: 12px;
@@ -116,6 +112,7 @@
   list-style-type: none;
 }
 .genre-mood-link {
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -142,9 +139,7 @@
     flex-direction: column;
     align-items: center;
     gap: 8px;
-    margin-bottom: 16px;
     text-decoration: none;
-    border: 1px solid green;
   }
   .playlist-item-img {
     width: 100%;
@@ -182,17 +177,17 @@
   .editorsPicks-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 30px;
+    gap: 16px 30px;
     padding: 0px;
+    padding-right: 24px;
     margin: 0px;
   }
   .genre-mood-item {
-    width: 25%;
+    width: 26%;
     border-radius: 8px;
     text-decoration: none;
     padding-left: 12px;
     overflow: hidden;
-    border: 1px solid green;
   }
   .genre-mood-link {
     height: 100%;
@@ -200,13 +195,11 @@
     flex-direction: column;
     justify-content: space-between;
     text-decoration: none;
-    border: 1px solid green;
   }
   .genre-name {
     color: #f8fafc;
     font-size: 12px;
     font-weight: 700;
-    border: 1px solid green;
   }
 
   .genre-icon {
@@ -214,6 +207,31 @@
     height: 50px;
     align-self: flex-end;
     justify-content: flex-end;
-    border: 1px solid green;
+  }
+  .loader-or-failure-container {
+    background-color: #040306;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    padding: 127px 49px;
+  }
+
+  .spotify-icon {
+    width: 140px;
+    height: 80px;
+  }
+  .loading-text {
+    font-size: 30px;
+  }
+  .failure-text {
+    font-size: 12px;
+  }
+  .try-again-button {
+    padding: 2px 12px;
+    border-radius: 3px;
+    font-size: 12px;
   }
 }
