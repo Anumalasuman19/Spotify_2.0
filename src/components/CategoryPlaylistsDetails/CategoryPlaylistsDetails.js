@@ -1,24 +1,14 @@
-import {useState, useEffect, useCallback} from 'react'
-import {Link} from 'react-router-dom'
+import {useState, useEffect} from 'react'
 import SideBar from '../SideBar/SideBar'
-import {apiStatus} from '../PlaylistsDetails/PlaylistsDetails'
+import {ApiStatus} from '../Constants/Constants'
 import './CategoryPlaylistsDetails.css'
-
-const CategoryItemDetails = props => {
-  const {imgUrl, name, totalTracks, id} = props
-  return (
-    <Link className="category-item-details-container" to={`/playlist/${id}`}>
-      <img src={imgUrl} alt="ns" className="category-img" />
-      <div className="name-and-tracks">
-        <h2 className="name">{name}</h2>
-        <p className="total-tracks">{totalTracks} Tracks</p>
-      </div>
-    </Link>
-  )
-}
+import CategoryItemDetails from './CategoryItemDetails/CategoryItemDetails'
+import '../CommonStyles/CommonStyles.css'
+import LoadingView from '../CommonComponents/LoadingView/LoadingView'
+import FailureView from '../CommonComponents/FailureView/FailureView'
 
 const CategoryPlaylistsDetails = ({match, history}) => {
-  const [categoryApiStatus, SetCategoryApiStatus] = useState(apiStatus.initial)
+  const [categoryApiStatus, SetCategoryApiStatus] = useState(ApiStatus.initial)
   const [categoryApiData, SetCategoryApiData] = useState({})
   const toCamelCase = str =>
     str.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase())
@@ -38,7 +28,7 @@ const CategoryPlaylistsDetails = ({match, history}) => {
   }
 
   const categoryApiUrl = async () => {
-    SetCategoryApiStatus(apiStatus.inprogress)
+    SetCategoryApiStatus(ApiStatus.inprogress)
     console.log(categoryApiStatus)
     const {id} = match.params
     const url = `https://apis2.ccbp.in/spotify-clone/category-playlists/${id}`
@@ -48,59 +38,39 @@ const CategoryPlaylistsDetails = ({match, history}) => {
       const rawData = await response.json()
       const jsonData = convertKeysToCamelCase(rawData)
       SetCategoryApiData(jsonData)
-      SetCategoryApiStatus(apiStatus.success)
+      SetCategoryApiStatus(ApiStatus.success)
       console.log(jsonData)
     } catch {
-      SetCategoryApiStatus(apiStatus.failure)
+      SetCategoryApiStatus(ApiStatus.failure)
     }
   }
-
-  const loadingView = () => (
-    <div className="playlist-loader-or-failure-container">
-      <img
-        className="spotify-icon"
-        src="https://res.cloudinary.com/dzki1pesn/image/upload/v1747385633/spotify-logo_fdkhrw.png"
-        alt="fsfs"
-      />
-      <h1 className="loading-text">Loading...</h1>
-    </div>
-  )
 
   const onClickOfTryAgain = () => {
     categoryApiStatus()
   }
 
   const onClickOfBack = () => {
-    history.push('/')
+    history.goBack()
   }
-
-  const failureView = () => (
-    <div className="playlist-loader-or-failure-container">
-      <img
-        src="https://res.cloudinary.com/dzki1pesn/image/upload/v1747733067/wdy0iusw5knlayakakjm.png"
-        alt="failure view"
-      />
-      <p className="failure-text">Something went wrong. Please try again</p>
-      <button
-        type="button"
-        className="try-again-button"
-        onClick={onClickOfTryAgain}
-      >
-        Try Again
-      </button>
-    </div>
-  )
 
   const renderSection = () => {
     let content
     switch (categoryApiStatus) {
-      case apiStatus.inprogress:
-        content = loadingView()
+      case ApiStatus.inprogress:
+        content = (
+          <div className="playlist-loader-or-failure-container">
+            <LoadingView />
+          </div>
+        )
         break
-      case apiStatus.failure:
-        content = failureView()
+      case ApiStatus.failure:
+        content = (
+          <div className="playlist-loader-or-failure-container">
+            <FailureView onClickOfTryAgain={onClickOfTryAgain} />
+          </div>
+        )
         break
-      case apiStatus.success: {
+      case ApiStatus.success: {
         const trackItems = Array.isArray(categoryApiData?.playlists.items)
           ? categoryApiData.playlists.items
           : []

@@ -1,25 +1,3 @@
-.album-item-container {
-  display: flex;
-  align-items: center;
-  padding: 0px 32px;
-  color: #ffffff;
-  margin: 0px;
-}
-.track-and-artists {
-  display: none;
-}
-.track-number {
-  width: 5%;
-}
-.track {
-  width: 40%;
-}
-.song-duration {
-  width: 30%;
-}
-.artists-names {
-  width: 30%;
-}
 .current-song-container {
   justify-self: flex-end;
 }
@@ -38,14 +16,6 @@
   gap: 16px;
 }
 @media (max-width: 425px) {
-  .album-no-display {
-    display: none;
-  }
-  .album-item-container {
-    justify-content: space-between;
-    padding: 0px 24px;
-    gap: 12px;
-  }
   .album-titles-and-album-list {
     display: flex;
     flex-direction: column;
@@ -66,5 +36,8 @@
   .artists-names {
     width: 100%;
     margin: 0px;
+  }
+  .album-no-display {
+    display: none;
   }
 }

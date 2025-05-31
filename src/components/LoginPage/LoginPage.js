@@ -7,7 +7,6 @@ const LoginPage = props => {
   const [userName, SetUserName] = useState('')
   const [password, SetPassword] = useState('')
   const [errorMessage, SetErrorMessage] = useState('')
-  const [isLoading, SetLoader] = useState(false)
 
   const onUserNameChange = event => {
     SetUserName(event.target.value)
@@ -20,7 +19,6 @@ const LoginPage = props => {
 
   const onLoginSuccess = jwtToken => {
     console.log(jwtToken)
-    SetLoader(true)
     Cookies.set('jwt_token', jwtToken, {
       expires: 30,
       path: '/',
@@ -41,13 +39,10 @@ const LoginPage = props => {
       body: JSON.stringify(userFilledDetails),
     }
     const apiResponse = await fetch(url, options)
-    console.log(apiResponse)
     const jsonResponse = await apiResponse.json()
-    console.log(jsonResponse)
     if (apiResponse.ok === true) {
       onLoginSuccess(jsonResponse.jwt_token)
     } else {
-      SetLoader(false)
       SetErrorMessage(jsonResponse.error_msg)
     }
   }
@@ -56,60 +51,49 @@ const LoginPage = props => {
     return <Redirect to="/" />
   }
   return (
-    <div className="login-container">
-      {isLoading ? (
-        <div className="loader-container">
+    <div className="login-page-container">
+      <form className="login-credentials-container" onSubmit={onLoginSubmit}>
+        <div className="logo-and-heading">
           <img
-            className="spotify-icon"
             src="https://res.cloudinary.com/dzki1pesn/image/upload/v1747385633/spotify-logo_fdkhrw.png"
+            className="spotify-icon"
             alt="login website logo"
           />
-          <h1 className="loading-text">Loading...</h1>
+          <h1 className="login-heading">Spotify Remix</h1>
         </div>
-      ) : (
-        <form className="login-credentials-container" onSubmit={onLoginSubmit}>
-          <div className="logo-and-heading">
-            <img
-              src="https://res.cloudinary.com/dzki1pesn/image/upload/v1747385633/spotify-logo_fdkhrw.png"
-              className="spotify-icon"
-              alt="login website logo"
+        <div className="username-password-container">
+          <div className="input-field-container">
+            <label htmlFor="login-username" className="input-field-label">
+              USERNAME
+            </label>
+            <input
+              id="login-username"
+              type="text"
+              className="login-input-field"
+              onChange={onUserNameChange}
+              value={userName}
+              required
             />
-            <h1 className="login-heading">Spotify Remix</h1>
           </div>
-          <div className="username-password-container">
-            <div className="input-field-container">
-              <label htmlFor="login-username" className="input-field-label">
-                USERNAME
-              </label>
-              <input
-                id="login-username"
-                type="text"
-                className="login-input-field"
-                onChange={onUserNameChange}
-                value={userName}
-                required
-              />
-            </div>
-            <div className="input-field-container">
-              <label htmlFor="login-password" className="input-field-label">
-                PASSWORD
-              </label>
-              <input
-                id="login-password"
-                type="password"
-                className="login-input-field"
-                onChange={onPasswordChange}
-                value={password}
-                required
-              />
-            </div>
-            <button className="login-button" type="submit">
-              Login
-            </button>
-            <p className="error-message">{errorMessage}</p>
+          <div className="input-field-container">
+            <label htmlFor="login-password" className="input-field-label">
+              PASSWORD
+            </label>
+            <input
+              id="login-password"
+              type="password"
+              className="login-input-field"
+              onChange={onPasswordChange}
+              value={password}
+              required
+            />
           </div>
-        </form>
-      )}
+          <button className="login-button" type="submit">
+            Login
+          </button>
+          <p className="error-message">{errorMessage}</p>
+        </div>
+      </form>
     </div>
   )
 }

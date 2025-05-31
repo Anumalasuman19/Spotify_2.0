@@ -2,122 +2,16 @@ import {useEffect, useState} from 'react'
 import Cookies from 'js-cookie'
 import SideBar from '../SideBar/SideBar'
 import './PlaylistsDetails.css'
-
-export const PlaylistInfo = props => {
-  const {imgUrl, playlistName, featureName} = props
-  return (
-    <div className="playlist-info-container">
-      <img src={imgUrl} alt="nsnv" className="playlist-img" />
-      <div className="info">
-        <p className="feature-name">{featureName}</p>
-        <h1 className="playlist-name">{playlistName}</h1>
-      </div>
-    </div>
-  )
-}
-const PlaylistItemInfo = props => {
-  const {
-    songNumber,
-    track,
-    album,
-    duration,
-    artists,
-    addedDuration,
-    id,
-    onClickOfItem,
-    isSelected,
-  } = props
-  const convertMillisToMinSec = ms => {
-    const totalSeconds = Math.floor(ms / 1000)
-    const minutes = Math.floor(totalSeconds / 60)
-    const seconds = totalSeconds % 60
-    const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds
-    return `${minutes}:${formattedSeconds}`
-  }
-
-  const getTimeAgo = isoDate => {
-    const now = new Date()
-    const past = new Date(isoDate)
-
-    const diffMs = now - past
-    const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24))
-    const diffMonths = Math.floor(diffDays / 30)
-
-    if (diffDays < 1) return 'Today'
-    if (diffDays === 1) return '1 day ago'
-    if (diffDays < 30) return `${diffDays} days ago`
-    if (diffMonths === 1) return '1 month ago'
-    return `${diffMonths} months ago`
-  }
-
-  const onClickOfPlaylistItem = () => {
-    onClickOfItem(id)
-  }
-  const containerStyle = isSelected ? 'playlist-selected-item-container' : ''
-  return (
-    <li
-      className={`playlist-item-container ${containerStyle}`}
-      onClick={onClickOfPlaylistItem}
-    >
-      <div className="track-and-artists">
-        <p className="item-text track-text">{track}</p>
-        <p className="item-text artists-text">
-          {artists.map(artist => artist.name).join(', ')}
-        </p>
-      </div>
-      <p className="item-text no-display song-number">{songNumber}</p>
-      <p className="item-text track-text no-display">{track}</p>
-      <p className="item-text album-text no-display">{album}</p>
-      <p className="item-text duration-text">
-        {convertMillisToMinSec(duration)}
-      </p>
-      <p className="item-text artists-text no-display">
-        {artists.map(artist => artist.name).join(', ')}
-      </p>
-      <p className="item-text added-duration no-display">
-        {getTimeAgo(addedDuration)}
-      </p>
-    </li>
-  )
-}
-
-export const AudioPlayer = ({track, imgUrl}) => {
-  const artistsName = track.artists?.map(artist => artist.name).join(', ') ?? ''
-
-  return (
-    <div className="audio-container">
-      {/* Song Info */}
-      <div className="song-info">
-        <img src={imgUrl} alt="Album Art" className="album-image" />
-        <div className="song-and-artist">
-          <p className="song-title">{track.name}</p>
-          <p className="artist-name">{artistsName}</p>
-        </div>
-      </div>
-
-      {/* Audio Controls */}
-      <div className="audio-controls">
-        {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-        <audio
-          controls
-          autoPlay
-          src={track.previewUrl}
-          className="audio-element"
-        />
-      </div>
-    </div>
-  )
-}
-
-export const apiStatus = {
-  initial: 'INITIAL',
-  inprogress: 'IN_PROGRESS',
-  success: 'SUCCESS',
-  failure: 'FAILURE',
-}
+import AlbumPlaylistInfo from '../CommonComponents/AlbumPlaylistInfo/AlbumPlaylistInfo'
+import PlaylistSongInfo from './PlaylistSongInfo/PlaylistSongInfo'
+import '../CommonStyles/CommonStyles.css'
+import AudioPlayer from '../CommonComponents/AudioPlayer/AudioPlayer'
+import {ApiStatus} from '../Constants/Constants'
+import LoadingView from '../CommonComponents/LoadingView/LoadingView'
+import FailureView from '../CommonComponents/FailureView/FailureView'
 
 const PlaylistsDetails = ({match, history}) => {
-  const [playlistApiStatus, SetPlaylistApiStatus] = useState(apiStatus.initial)
+  const [playlistApiStatus, SetPlaylistApiStatus] = useState(ApiStatus.initial)
   const [playlistData, SetPlaylistData] = useState({})
   const [currentSelectedTrack, SetCurrentSelectedTrack] = useState({})
   const onClickOfBack = () => {
@@ -142,7 +36,7 @@ const PlaylistsDetails = ({match, history}) => {
   }
 
   const makePlaylistApi = async () => {
-    SetPlaylistApiStatus(apiStatus.inprogress)
+    SetPlaylistApiStatus(ApiStatus.inprogress)
     const {id} = match.params
     const url = `https://apis2.ccbp.in/spotify-clone/playlists-details/${id}`
     const jwtToken = Cookies.get('jwt_token')
@@ -156,44 +50,16 @@ const PlaylistsDetails = ({match, history}) => {
       const rawData = await response.json()
       const jsonData = convertKeysToCamelCase(rawData)
       SetPlaylistData(jsonData)
-      SetPlaylistApiStatus(apiStatus.success)
+      SetPlaylistApiStatus(ApiStatus.success)
       console.log(jsonData)
     } else {
-      SetPlaylistApiStatus(apiStatus.failure)
+      SetPlaylistApiStatus(ApiStatus.failure)
     }
   }
-
-  const loadingView = () => (
-    <div className="playlist-loader-or-failure-container">
-      <img
-        className="spotify-icon"
-        src="https://res.cloudinary.com/dzki1pesn/image/upload/v1747385633/spotify-logo_fdkhrw.png"
-        alt="fsfs"
-      />
-      <h1 className="loading-text">Loading...</h1>
-    </div>
-  )
 
   const onClickOfTryAgain = () => {
     makePlaylistApi()
   }
-
-  const failureView = () => (
-    <div className="playlist-loader-or-failure-container">
-      <img
-        src="https://res.cloudinary.com/dzki1pesn/image/upload/v1747733067/wdy0iusw5knlayakakjm.png"
-        alt="failure view"
-      />
-      <p className="failure-text">Something went wrong. Please try again</p>
-      <button
-        type="button"
-        className="try-again-button"
-        onClick={onClickOfTryAgain}
-      >
-        Try Again
-      </button>
-    </div>
-  )
 
   const onClickOfPlaylistItem = id => {
     const selectedItem = playlistData.tracks.items.find(
@@ -209,13 +75,21 @@ const PlaylistsDetails = ({match, history}) => {
     const padding = ''
     let content
     switch (playlistApiStatus) {
-      case apiStatus.inprogress:
-        content = loadingView()
+      case ApiStatus.inprogress:
+        content = (
+          <div className="playlist-loader-or-failure-container">
+            <LoadingView />
+          </div>
+        )
         break
-      case apiStatus.failure:
-        content = failureView()
+      case ApiStatus.failure:
+        content = (
+          <div className="playlist-loader-or-failure-container">
+            <FailureView onClickOfTryAgain={onClickOfTryAgain} />
+          </div>
+        )
         break
-      case apiStatus.success: {
+      case ApiStatus.success: {
         const imageUrl =
           playlistData.images?.[0]?.url ?? 'https://via.placeholder.com/150'
 
@@ -225,7 +99,7 @@ const PlaylistsDetails = ({match, history}) => {
         content = (
           <div className="playlist-content-container">
             <div>
-              <PlaylistInfo
+              <AlbumPlaylistInfo
                 imgUrl={imageUrl}
                 playlistName={playlistData.name}
                 featureName="Editor's picks"
@@ -242,7 +116,7 @@ const PlaylistsDetails = ({match, history}) => {
               <hr className="horizontal-line-style no-display" />
               <ul className="playlist-list">
                 {trackItems.map((item, index) => (
-                  <PlaylistItemInfo
+                  <PlaylistSongInfo
                     key={item.track.id || index}
                     songNumber={index + 1}
                     track={item.track?.name || 'Unknown'}
@@ -285,7 +159,7 @@ const PlaylistsDetails = ({match, history}) => {
           <p className="back-text">Back</p>
         </button>
         {renderSection()}
-        {playlistApiStatus === apiStatus.success ? (
+        {playlistApiStatus === ApiStatus.success ? (
           <div>
             <hr className="horizontal-line-style" />
             <AudioPlayer

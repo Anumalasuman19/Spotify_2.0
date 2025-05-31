@@ -1,58 +1,18 @@
 import {useState, useEffect} from 'react'
 import Cookies from 'js-cookie'
 import SideBar from '../SideBar/SideBar'
-import {
-  PlaylistInfo,
-  AudioPlayer,
-  apiStatus,
-} from '../PlaylistsDetails/PlaylistsDetails'
+import {ApiStatus} from '../Constants/Constants'
+import AlbumPlaylistInfo from '../CommonComponents/AlbumPlaylistInfo/AlbumPlaylistInfo'
 import './AlbumDetails.css'
-
-const AlbumItemInfo = props => {
-  const {
-    songNumber,
-    track,
-    duration,
-    artists,
-    id,
-    onClickOfItem,
-    isSelected,
-  } = props
-  const artistsNames = artists.map(artist => artist.name).join(', ')
-  const convertMillisToMinSec = ms => {
-    const totalSeconds = Math.floor(ms / 1000)
-    const minutes = Math.floor(totalSeconds / 60)
-    const seconds = totalSeconds % 60
-    const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds
-    return `${minutes}:${formattedSeconds}`
-  }
-
-  const onClickOfAlbumItem = () => {
-    onClickOfItem(id)
-  }
-  const containerStyle = isSelected ? 'playlist-selected-item-container' : ''
-  return (
-    <li
-      className={`album-item-container ${containerStyle}`}
-      onClick={onClickOfAlbumItem}
-    >
-      <div className="track-and-artists">
-        <p className="item-text track">{track}</p>
-        <p className="item-text artists-names">{artistsNames}</p>
-      </div>
-      <p className="item-text track-number album-no-display">{songNumber}</p>
-      <p className="item-text track album-no-display">{track}</p>
-      <p className="item-text song-duration">
-        {convertMillisToMinSec(duration)}
-      </p>
-      <p className="item-text artists-names album-no-display">{artistsNames}</p>
-    </li>
-  )
-}
+import AudioPlayer from '../CommonComponents/AudioPlayer/AudioPlayer'
+import AlbumSongItem from './AlbumSongItem/AlbumSongItem'
+import '../CommonStyles/CommonStyles.css'
+import LoadingView from '../CommonComponents/LoadingView/LoadingView'
+import FailureView from '../CommonComponents/FailureView/FailureView'
 
 const AlbumDetails = ({match, history}) => {
   const [newReleaseAlbumStatus, SetNewReleaseAlbumStatus] = useState(
-    apiStatus.initial,
+    ApiStatus.initial,
   )
   const [newReleaseAlbumData, SetNewReleaseAlbumData] = useState({})
   const [currentPlayingAlbum, SetCurrentPlayingAlbum] = useState({})
@@ -74,7 +34,7 @@ const AlbumDetails = ({match, history}) => {
   }
 
   const newReleaseAlbumPlaylistApiUrl = async () => {
-    SetNewReleaseAlbumStatus(apiStatus.inprogress)
+    SetNewReleaseAlbumStatus(ApiStatus.inprogress)
     console.log(newReleaseAlbumStatus)
     const {id} = match.params
     const url = `https://apis2.ccbp.in/spotify-clone/album-details/${id}`
@@ -88,44 +48,16 @@ const AlbumDetails = ({match, history}) => {
     const jsonData = convertKeysToCamelCase(rawData)
     if (response.ok) {
       SetNewReleaseAlbumData(jsonData)
-      SetNewReleaseAlbumStatus(apiStatus.success)
+      SetNewReleaseAlbumStatus(ApiStatus.success)
       console.log(jsonData)
     } else {
-      SetNewReleaseAlbumStatus(apiStatus.failure)
+      SetNewReleaseAlbumStatus(ApiStatus.failure)
     }
   }
-
-  const loadingView = () => (
-    <div className="playlist-loader-or-failure-container">
-      <img
-        className="spotify-icon"
-        src="https://res.cloudinary.com/dzki1pesn/image/upload/v1747385633/spotify-logo_fdkhrw.png"
-        alt="fsfs"
-      />
-      <h1 className="loading-text">Loading...</h1>
-    </div>
-  )
 
   const onClickOfTryAgain = () => {
     newReleaseAlbumPlaylistApiUrl()
   }
-
-  const failureView = () => (
-    <div className="playlist-loader-or-failure-container">
-      <img
-        src="https://res.cloudinary.com/dzki1pesn/image/upload/v1747733067/wdy0iusw5knlayakakjm.png"
-        alt="failure view"
-      />
-      <p className="failure-text">Something went wrong. Please try again</p>
-      <button
-        type="button"
-        className="try-again-button"
-        onClick={onClickOfTryAgain}
-      >
-        Try Again
-      </button>
-    </div>
-  )
 
   const onClickOfAlbumItem = id => {
     const selectedItem = newReleaseAlbumData.tracks.items.find(
@@ -138,19 +70,27 @@ const AlbumDetails = ({match, history}) => {
   }
 
   const onClickOfBack = () => {
-    history.push('/')
+    history.goBack()
   }
 
   const renderSection = () => {
     let content
     switch (newReleaseAlbumStatus) {
-      case apiStatus.inprogress:
-        content = loadingView()
+      case ApiStatus.inprogress:
+        content = (
+          <div className="playlist-loader-or-failure-container">
+            <LoadingView />
+          </div>
+        )
         break
-      case apiStatus.failure:
-        content = failureView()
+      case ApiStatus.failure:
+        content = (
+          <div className="playlist-loader-or-failure-container">
+            <FailureView onClickOfTryAgain={onClickOfTryAgain} />
+          </div>
+        )
         break
-      case apiStatus.success: {
+      case ApiStatus.success: {
         const imageUrl =
           newReleaseAlbumData.images?.[0]?.url ??
           'https://via.placeholder.com/150'
@@ -161,22 +101,22 @@ const AlbumDetails = ({match, history}) => {
         content = (
           <div className="playlist-content-container">
             <div className="back-and-album-container">
-              <PlaylistInfo
+              <AlbumPlaylistInfo
                 imgUrl={imageUrl}
                 playlistName={newReleaseAlbumData.name}
                 featureName="New Releases"
               />
               <div className="album-titles-and-album-list">
-                <div className="album-item-container album-no-display">
+                <div className="album-item-container no-display">
                   <p className="item-text track-number">#</p>
                   <p className="item-text track">Track</p>
                   <p className="item-text song-duration">Time</p>
                   <p className="item-text artists-names">Artist</p>
                 </div>
-                <hr className="horizontal-line-style album-no-display" />
+                <hr className="horizontal-line-style no-display" />
                 <ul className="album-list">
                   {trackItems.map((item, index) => (
-                    <AlbumItemInfo
+                    <AlbumSongItem
                       key={item?.id || index}
                       songNumber={item.trackNumber}
                       track={item?.name || 'Unknown'}
@@ -194,7 +134,6 @@ const AlbumDetails = ({match, history}) => {
         )
         break
       }
-
       default:
         content = null
     }
@@ -220,7 +159,7 @@ const AlbumDetails = ({match, history}) => {
           <p className="back-text">Back</p>
         </button>
         {renderSection()}
-        {newReleaseAlbumStatus === apiStatus.success ? (
+        {newReleaseAlbumStatus === ApiStatus.success ? (
           <div className="current-song-container">
             <hr className="horizontal-line-style" />
             <AudioPlayer

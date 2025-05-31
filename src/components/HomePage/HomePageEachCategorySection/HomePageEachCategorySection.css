@@ -1,0 +1,40 @@
+.editorsPicks-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 48px;
+  padding: 0px;
+  padding-right: 70px;
+  margin: 0px;
+}
+.editorsPicks-container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.sub-heading {
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0px;
+}
+.each-category-loading-and-failure-container {
+  padding-right: 12px;
+  height: 450px;
+}
+@media (max-width: 425px) {
+  .editorsPicks-container {
+    gap: 24px;
+    margin: 0px 0px;
+    padding-left: 24px;
+  }
+
+  .editorsPicks-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 30px;
+    padding: 0px;
+    padding-right: 24px;
+    margin: 0px;
+  }
+}
