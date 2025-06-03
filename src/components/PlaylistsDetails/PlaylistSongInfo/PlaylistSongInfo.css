@@ -1,0 +1,14 @@
+.playlist-selected-item-container {
+  background-color: #303030;
+}
+.track-and-artists {
+  display: none;
+}
+@media (max-width: 425px) {
+  .track-and-artists {
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}

@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react'
 import Cookies from 'js-cookie'
 import SideBar from '../SideBar/SideBar'
 import './PlaylistsDetails.css'
+<<<<<<< HEAD
 
 export const PlaylistInfo = props => {
   const {imgUrl, playlistName, featureName} = props
@@ -136,6 +137,22 @@ const PlaylistsDetails = ({match, history}) => {
   const [currentSelectedTrack, SetCurrentSelectedTrack] = useState({})
   const onClickOfBack = () => {
     history.push('/')
+=======
+import AlbumPlaylistInfo from '../CommonComponents/AlbumPlaylistInfo/AlbumPlaylistInfo'
+import PlaylistSongInfo from './PlaylistSongInfo/PlaylistSongInfo'
+import '../CommonStyles/CommonStyles.css'
+import AudioPlayer from '../CommonComponents/AudioPlayer/AudioPlayer'
+import {ApiStatus} from '../Constants/Constants'
+import LoadingView from '../CommonComponents/LoadingView/LoadingView'
+import FailureView from '../CommonComponents/FailureView/FailureView'
+
+const PlaylistsDetails = ({match, history}) => {
+  const [playlistApiStatus, SetPlaylistApiStatus] = useState(ApiStatus.initial)
+  const [playlistData, SetPlaylistData] = useState({})
+  const [currentSelectedTrack, SetCurrentSelectedTrack] = useState({})
+  const onClickOfBack = () => {
+    history.goBack()
+>>>>>>> moved the components folder to spotify remix folder
   }
 
   const toCamelCase = str =>
@@ -156,7 +173,11 @@ const PlaylistsDetails = ({match, history}) => {
   }
 
   const makePlaylistApi = async () => {
+<<<<<<< HEAD
     SetPlaylistApiStatus(apiStatus.inprogress)
+=======
+    SetPlaylistApiStatus(ApiStatus.inprogress)
+>>>>>>> moved the components folder to spotify remix folder
     const {id} = match.params
     const url = `https://apis2.ccbp.in/spotify-clone/playlists-details/${id}`
     const jwtToken = Cookies.get('jwt_token')
@@ -170,6 +191,7 @@ const PlaylistsDetails = ({match, history}) => {
       const rawData = await response.json()
       const jsonData = convertKeysToCamelCase(rawData)
       SetPlaylistData(jsonData)
+<<<<<<< HEAD
       SetPlaylistApiStatus(apiStatus.success)
       console.log(jsonData)
     } else {
@@ -188,10 +210,20 @@ const PlaylistsDetails = ({match, history}) => {
     </div>
   )
 
+=======
+      SetPlaylistApiStatus(ApiStatus.success)
+      console.log(jsonData)
+    } else {
+      SetPlaylistApiStatus(ApiStatus.failure)
+    }
+  }
+
+>>>>>>> moved the components folder to spotify remix folder
   const onClickOfTryAgain = () => {
     makePlaylistApi()
   }
 
+<<<<<<< HEAD
   const failureView = () => (
     <div className="playlist-loader-or-failure-container">
       <img
@@ -209,6 +241,8 @@ const PlaylistsDetails = ({match, history}) => {
     </div>
   )
 
+=======
+>>>>>>> moved the components folder to spotify remix folder
   const onClickOfPlaylistItem = id => {
     const selectedItem = playlistData.tracks.items.find(
       item => item.track.id === id,
@@ -220,6 +254,7 @@ const PlaylistsDetails = ({match, history}) => {
   }
 
   const renderSection = () => {
+<<<<<<< HEAD
     const padding = '60px'
     let content
     switch (playlistApiStatus) {
@@ -230,6 +265,26 @@ const PlaylistsDetails = ({match, history}) => {
         content = failureView()
         break
       case apiStatus.success: {
+=======
+    const padding = ''
+    let content
+    switch (playlistApiStatus) {
+      case ApiStatus.inprogress:
+        content = (
+          <div className="playlist-loader-or-failure-container">
+            <LoadingView />
+          </div>
+        )
+        break
+      case ApiStatus.failure:
+        content = (
+          <div className="playlist-loader-or-failure-container">
+            <FailureView onClickOfTryAgain={onClickOfTryAgain} />
+          </div>
+        )
+        break
+      case ApiStatus.success: {
+>>>>>>> moved the components folder to spotify remix folder
         const imageUrl =
           playlistData.images?.[0]?.url ?? 'https://via.placeholder.com/150'
 
@@ -239,16 +294,25 @@ const PlaylistsDetails = ({match, history}) => {
         content = (
           <div className="playlist-content-container">
             <div>
+<<<<<<< HEAD
               <PlaylistInfo
+=======
+              <AlbumPlaylistInfo
+>>>>>>> moved the components folder to spotify remix folder
                 imgUrl={imageUrl}
                 playlistName={playlistData.name}
                 featureName="Editor's picks"
                 description={playlistData.description}
               />
               <div className="playlist-item-container no-display">
+<<<<<<< HEAD
                 <p className="item-text track-text" style={{padding}}>
                   Track
                 </p>
+=======
+                <p className="item-text song-number">{padding}</p>
+                <p className="item-text track-text">Track</p>
+>>>>>>> moved the components folder to spotify remix folder
                 <p className="item-text album-text">Album</p>
                 <p className="item-text duration-text">Time</p>
                 <p className="item-text artists-text">Artist</p>
@@ -257,7 +321,11 @@ const PlaylistsDetails = ({match, history}) => {
               <hr className="horizontal-line-style no-display" />
               <ul className="playlist-list">
                 {trackItems.map((item, index) => (
+<<<<<<< HEAD
                   <PlaylistItemInfo
+=======
+                  <PlaylistSongInfo
+>>>>>>> moved the components folder to spotify remix folder
                     key={item.track.id || index}
                     songNumber={index + 1}
                     track={item.track?.name || 'Unknown'}
@@ -272,6 +340,7 @@ const PlaylistsDetails = ({match, history}) => {
                 ))}
               </ul>
             </div>
+<<<<<<< HEAD
             <div>
               <hr />
               <AudioPlayer
@@ -279,6 +348,8 @@ const PlaylistsDetails = ({match, history}) => {
                 imgUrl={currentSelectedTrack?.album?.images[0].url}
               />
             </div>
+=======
+>>>>>>> moved the components folder to spotify remix folder
           </div>
         )
         break
@@ -287,7 +358,10 @@ const PlaylistsDetails = ({match, history}) => {
       default:
         content = null
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> moved the components folder to spotify remix folder
     return <div className="playlist-and-details-container">{content}</div>
   }
 
@@ -296,7 +370,13 @@ const PlaylistsDetails = ({match, history}) => {
   }, [])
   return (
     <div className="playlist-container">
+<<<<<<< HEAD
       <SideBar />
+=======
+      <div className="playlist-sidebar-container">
+        <SideBar />
+      </div>
+>>>>>>> moved the components folder to spotify remix folder
       <div className="playlist-content-wrapper">
         <button type="button" className="back-button" onClick={onClickOfBack}>
           <img
@@ -306,7 +386,21 @@ const PlaylistsDetails = ({match, history}) => {
           <p className="back-text">Back</p>
         </button>
         {renderSection()}
+<<<<<<< HEAD
         <p className="playlist-description">{playlistData.description}</p>
+=======
+        {playlistApiStatus === ApiStatus.success ? (
+          <div>
+            <hr className="horizontal-line-style" />
+            <AudioPlayer
+              track={currentSelectedTrack}
+              imgUrl={currentSelectedTrack?.album?.images[0].url}
+            />
+          </div>
+        ) : (
+          <></>
+        )}
+>>>>>>> moved the components folder to spotify remix folder
       </div>
     </div>
   )

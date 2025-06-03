@@ -2,13 +2,19 @@
   width: 100%;
   height: 100vh;
   background-color: #181818;
+<<<<<<< HEAD
   border: 1px solid blue;
+=======
+>>>>>>> moved the components folder to spotify remix folder
   display: flex;
   flex-direction: row;
 }
 .page-not-found-content {
+<<<<<<< HEAD
   width: 100%;
   height: 100vh;
+=======
+>>>>>>> moved the components folder to spotify remix folder
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -16,7 +22,10 @@
   flex-grow: 1;
 }
 .heading-and-text {
+<<<<<<< HEAD
   width: 100%;
+=======
+>>>>>>> moved the components folder to spotify remix folder
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -24,10 +33,16 @@
   align-self: center;
   justify-self: center;
 }
+<<<<<<< HEAD
 .page-not-found-heading {
   font-size: 400px;
   font-weight: 800;
   color: #1ed760;
+=======
+.page-not-found-img {
+  width: 836px;
+  height: 484px;
+>>>>>>> moved the components folder to spotify remix folder
   margin: 0px;
 }
 .page-not-found-text {
@@ -37,23 +52,34 @@
   margin: 0px;
 }
 
+<<<<<<< HEAD
 @media (width: 360px) and (height: 640px) {
   .page-not-found-container {
     width: 100%;
     height: 100vh;
+=======
+@media (max-width: 425px) {
+  .page-not-found-container {
+>>>>>>> moved the components folder to spotify remix folder
     background-color: #181818;
     display: flex;
     flex-direction: column;
   }
   .page-not-found-content {
+<<<<<<< HEAD
     width: 100%;
     height: 100%;
+=======
+>>>>>>> moved the components folder to spotify remix folder
     display: flex;
     flex-direction: column;
     gap: 16px;
   }
   .heading-and-text {
+<<<<<<< HEAD
     width: 100%;
+=======
+>>>>>>> moved the components folder to spotify remix folder
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -61,10 +87,16 @@
     align-self: center;
     justify-self: center;
   }
+<<<<<<< HEAD
   .page-not-found-heading {
     font-size: 148px;
     font-weight: 800;
     color: #1ed760;
+=======
+  .page-not-found-img {
+    width: 315px;
+    height: 190px;
+>>>>>>> moved the components folder to spotify remix folder
     margin: 0px;
   }
   .page-not-found-text {

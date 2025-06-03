@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react'
 import Cookies from 'js-cookie'
 import SideBar from '../SideBar/SideBar'
+<<<<<<< HEAD
 import {
   PlaylistInfo,
   AudioPlayer,
@@ -47,6 +48,20 @@ const AlbumItemInfo = props => {
 const AlbumDetails = ({match, history}) => {
   const [newReleaseAlbumStatus, SetNewReleaseAlbumStatus] = useState(
     apiStatus.initial,
+=======
+import {ApiStatus} from '../Constants/Constants'
+import AlbumPlaylistInfo from '../CommonComponents/AlbumPlaylistInfo/AlbumPlaylistInfo'
+import './AlbumDetails.css'
+import AudioPlayer from '../CommonComponents/AudioPlayer/AudioPlayer'
+import AlbumSongItem from './AlbumSongItem/AlbumSongItem'
+import '../CommonStyles/CommonStyles.css'
+import LoadingView from '../CommonComponents/LoadingView/LoadingView'
+import FailureView from '../CommonComponents/FailureView/FailureView'
+
+const AlbumDetails = ({match, history}) => {
+  const [newReleaseAlbumStatus, SetNewReleaseAlbumStatus] = useState(
+    ApiStatus.initial,
+>>>>>>> moved the components folder to spotify remix folder
   )
   const [newReleaseAlbumData, SetNewReleaseAlbumData] = useState({})
   const [currentPlayingAlbum, SetCurrentPlayingAlbum] = useState({})
@@ -68,7 +83,11 @@ const AlbumDetails = ({match, history}) => {
   }
 
   const newReleaseAlbumPlaylistApiUrl = async () => {
+<<<<<<< HEAD
     SetNewReleaseAlbumStatus(apiStatus.inprogress)
+=======
+    SetNewReleaseAlbumStatus(ApiStatus.inprogress)
+>>>>>>> moved the components folder to spotify remix folder
     console.log(newReleaseAlbumStatus)
     const {id} = match.params
     const url = `https://apis2.ccbp.in/spotify-clone/album-details/${id}`
@@ -82,6 +101,7 @@ const AlbumDetails = ({match, history}) => {
     const jsonData = convertKeysToCamelCase(rawData)
     if (response.ok) {
       SetNewReleaseAlbumData(jsonData)
+<<<<<<< HEAD
       SetNewReleaseAlbumStatus(apiStatus.success)
       console.log(jsonData)
     } else {
@@ -100,10 +120,20 @@ const AlbumDetails = ({match, history}) => {
     </div>
   )
 
+=======
+      SetNewReleaseAlbumStatus(ApiStatus.success)
+      console.log(jsonData)
+    } else {
+      SetNewReleaseAlbumStatus(ApiStatus.failure)
+    }
+  }
+
+>>>>>>> moved the components folder to spotify remix folder
   const onClickOfTryAgain = () => {
     newReleaseAlbumPlaylistApiUrl()
   }
 
+<<<<<<< HEAD
   const failureView = () => (
     <div className="playlist-loader-or-failure-container">
       <img
@@ -121,6 +151,8 @@ const AlbumDetails = ({match, history}) => {
     </div>
   )
 
+=======
+>>>>>>> moved the components folder to spotify remix folder
   const onClickOfAlbumItem = id => {
     const selectedItem = newReleaseAlbumData.tracks.items.find(
       item => item.id === id,
@@ -132,12 +164,17 @@ const AlbumDetails = ({match, history}) => {
   }
 
   const onClickOfBack = () => {
+<<<<<<< HEAD
     history.push('/')
+=======
+    history.goBack()
+>>>>>>> moved the components folder to spotify remix folder
   }
 
   const renderSection = () => {
     let content
     switch (newReleaseAlbumStatus) {
+<<<<<<< HEAD
       case apiStatus.inprogress:
         content = loadingView()
         break
@@ -145,6 +182,23 @@ const AlbumDetails = ({match, history}) => {
         content = failureView()
         break
       case apiStatus.success: {
+=======
+      case ApiStatus.inprogress:
+        content = (
+          <div className="playlist-loader-or-failure-container">
+            <LoadingView />
+          </div>
+        )
+        break
+      case ApiStatus.failure:
+        content = (
+          <div className="playlist-loader-or-failure-container">
+            <FailureView onClickOfTryAgain={onClickOfTryAgain} />
+          </div>
+        )
+        break
+      case ApiStatus.success: {
+>>>>>>> moved the components folder to spotify remix folder
         const imageUrl =
           newReleaseAlbumData.images?.[0]?.url ??
           'https://via.placeholder.com/150'
@@ -155,6 +209,7 @@ const AlbumDetails = ({match, history}) => {
         content = (
           <div className="playlist-content-container">
             <div className="back-and-album-container">
+<<<<<<< HEAD
               <PlaylistInfo
                 imgUrl={imageUrl}
                 playlistName={newReleaseAlbumData.name}
@@ -171,6 +226,24 @@ const AlbumDetails = ({match, history}) => {
                 <ul className="album-list">
                   {trackItems.map((item, index) => (
                     <AlbumItemInfo
+=======
+              <AlbumPlaylistInfo
+                imgUrl={imageUrl}
+                playlistName={newReleaseAlbumData.name}
+                featureName="New Releases"
+              />
+              <div className="album-titles-and-album-list">
+                <div className="album-item-container no-display">
+                  <p className="item-text track-number">#</p>
+                  <p className="item-text track">Track</p>
+                  <p className="item-text song-duration">Time</p>
+                  <p className="item-text artists-names">Artist</p>
+                </div>
+                <hr className="horizontal-line-style no-display" />
+                <ul className="album-list">
+                  {trackItems.map((item, index) => (
+                    <AlbumSongItem
+>>>>>>> moved the components folder to spotify remix folder
                       key={item?.id || index}
                       songNumber={item.trackNumber}
                       track={item?.name || 'Unknown'}
@@ -184,6 +257,7 @@ const AlbumDetails = ({match, history}) => {
                 </ul>
               </div>
             </div>
+<<<<<<< HEAD
             <div className="current-song-container">
               <hr />
               <AudioPlayer
@@ -191,11 +265,16 @@ const AlbumDetails = ({match, history}) => {
                 imgUrl={newReleaseAlbumData.images[0].url}
               />
             </div>
+=======
+>>>>>>> moved the components folder to spotify remix folder
           </div>
         )
         break
       }
+<<<<<<< HEAD
 
+=======
+>>>>>>> moved the components folder to spotify remix folder
       default:
         content = null
     }
@@ -209,7 +288,13 @@ const AlbumDetails = ({match, history}) => {
 
   return (
     <div className="playlist-container">
+<<<<<<< HEAD
       <SideBar />
+=======
+      <div className="playlist-sidebar-container">
+        <SideBar />
+      </div>
+>>>>>>> moved the components folder to spotify remix folder
       <div className="playlist-content-wrapper">
         <button type="button" className="back-button" onClick={onClickOfBack}>
           <img
@@ -219,6 +304,20 @@ const AlbumDetails = ({match, history}) => {
           <p className="back-text">Back</p>
         </button>
         {renderSection()}
+<<<<<<< HEAD
+=======
+        {newReleaseAlbumStatus === ApiStatus.success ? (
+          <div className="current-song-container">
+            <hr className="horizontal-line-style" />
+            <AudioPlayer
+              track={currentPlayingAlbum}
+              imgUrl={newReleaseAlbumData.images[0].url}
+            />
+          </div>
+        ) : (
+          <></>
+        )}
+>>>>>>> moved the components folder to spotify remix folder
       </div>
     </div>
   )

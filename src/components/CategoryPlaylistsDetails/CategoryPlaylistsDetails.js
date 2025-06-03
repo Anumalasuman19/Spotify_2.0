@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import {useState, useEffect, useCallback} from 'react'
 import {Link} from 'react-router-dom'
 import SideBar from '../SideBar/SideBar'
@@ -19,6 +20,20 @@ const CategoryItemDetails = props => {
 
 const CategoryPlaylistsDetails = ({match, history}) => {
   const [categoryApiStatus, SetCategoryApiStatus] = useState(apiStatus.initial)
+=======
+import {useState, useEffect} from 'react'
+import Cookies from 'js-cookie'
+import SideBar from '../SideBar/SideBar'
+import {ApiStatus} from '../Constants/Constants'
+import './CategoryPlaylistsDetails.css'
+import CategoryItemDetails from './CategoryItemDetails/CategoryItemDetails'
+import '../CommonStyles/CommonStyles.css'
+import LoadingView from '../CommonComponents/LoadingView/LoadingView'
+import FailureView from '../CommonComponents/FailureView/FailureView'
+
+const CategoryPlaylistsDetails = ({match, history}) => {
+  const [categoryApiStatus, SetCategoryApiStatus] = useState(ApiStatus.initial)
+>>>>>>> moved the components folder to spotify remix folder
   const [categoryApiData, SetCategoryApiData] = useState({})
   const toCamelCase = str =>
     str.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase())
@@ -38,6 +53,7 @@ const CategoryPlaylistsDetails = ({match, history}) => {
   }
 
   const categoryApiUrl = async () => {
+<<<<<<< HEAD
     SetCategoryApiStatus(apiStatus.inprogress)
     console.log(categoryApiStatus)
     const {id} = match.params
@@ -66,11 +82,34 @@ const CategoryPlaylistsDetails = ({match, history}) => {
     </div>
   )
 
+=======
+    SetCategoryApiStatus(ApiStatus.inprogress)
+    console.log(categoryApiStatus)
+    const {id} = match.params
+    const url = `https://apis2.ccbp.in/spotify-clone/category-playlists/${id}`
+    const jwtToken = Cookies.get('jwt_token')
+    const options = {
+      method: 'GET',
+      headers: {Authorization: `Bearer ${jwtToken}`},
+    }
+    const response = await fetch(url, options)
+    const rawData = await response.json()
+    const jsonData = convertKeysToCamelCase(rawData)
+    if (response.ok) {
+      SetCategoryApiData(jsonData)
+      SetCategoryApiStatus(ApiStatus.success)
+    } else {
+      SetCategoryApiStatus(ApiStatus.failure)
+    }
+  }
+
+>>>>>>> moved the components folder to spotify remix folder
   const onClickOfTryAgain = () => {
     categoryApiStatus()
   }
 
   const onClickOfBack = () => {
+<<<<<<< HEAD
     history.push('/')
   }
 
@@ -101,6 +140,29 @@ const CategoryPlaylistsDetails = ({match, history}) => {
         content = failureView()
         break
       case apiStatus.success: {
+=======
+    history.goBack()
+  }
+
+  const renderSection = () => {
+    let content
+    switch (categoryApiStatus) {
+      case ApiStatus.inprogress:
+        content = (
+          <div className="playlist-loader-or-failure-container">
+            <LoadingView />
+          </div>
+        )
+        break
+      case ApiStatus.failure:
+        content = (
+          <div className="playlist-loader-or-failure-container">
+            <FailureView onClickOfTryAgain={onClickOfTryAgain} />
+          </div>
+        )
+        break
+      case ApiStatus.success: {
+>>>>>>> moved the components folder to spotify remix folder
         const trackItems = Array.isArray(categoryApiData?.playlists.items)
           ? categoryApiData.playlists.items
           : []
@@ -108,7 +170,11 @@ const CategoryPlaylistsDetails = ({match, history}) => {
         console.log(categoryApiData.playlists.items)
         content = (
           <div className="category-content-container">
+<<<<<<< HEAD
             <p className="sub-heading podcast-text">Podcast</p>
+=======
+            <p className="podcast-text">Podcast</p>
+>>>>>>> moved the components folder to spotify remix folder
             <ul className="category-list-container">
               {trackItems.map(item => (
                 <CategoryItemDetails
@@ -138,7 +204,13 @@ const CategoryPlaylistsDetails = ({match, history}) => {
 
   return (
     <div className="category-container">
+<<<<<<< HEAD
       <SideBar />
+=======
+      <div className="playlist-sidebar-container">
+        <SideBar />
+      </div>
+>>>>>>> moved the components folder to spotify remix folder
       <div className="playlist-content-wrapper">
         <button type="button" className="back-button" onClick={onClickOfBack}>
           <img

@@ -1,0 +1,10 @@
+.track-and-artists {
+  display: none;
+}
+@media (max-width: 425px) {
+  .track-and-artists {
+    width: 88%;
+    display: flex;
+    flex-direction: column;
+  }
+}

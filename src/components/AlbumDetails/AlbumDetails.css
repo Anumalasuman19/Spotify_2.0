@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .album-item-container {
   width: 100%;
   height: 41px;
@@ -44,17 +45,24 @@
 }
 .current-song-container {
   width: 100%;
+=======
+.current-song-container {
+>>>>>>> moved the components folder to spotify remix folder
   justify-self: flex-end;
 }
 .album-list {
   padding: 0px;
+<<<<<<< HEAD
   margin: 0px;
+=======
+>>>>>>> moved the components folder to spotify remix folder
 }
 .back-and-album-container {
   width: 100%;
   display: flex;
   flex-direction: column;
 }
+<<<<<<< HEAD
 .horizontal-line {
   width: 100%;
 }
@@ -64,4 +72,37 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+=======
+
+.album-titles-and-album-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+@media (max-width: 425px) {
+  .album-titles-and-album-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .track-and-artists {
+    width: 88%;
+    display: flex;
+    flex-direction: column;
+  }
+  .track {
+    width: 100%;
+    margin: 0px;
+  }
+  .song-duration {
+    width: 10%;
+  }
+  .artists-names {
+    width: 100%;
+    margin: 0px;
+  }
+  .album-no-display {
+    display: none;
+  }
+>>>>>>> moved the components folder to spotify remix folder
 }

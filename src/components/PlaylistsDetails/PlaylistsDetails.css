@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .playlist-info-container {
   width: 100%;
   height: 295px;
@@ -137,11 +138,14 @@
   overflow: hidden;
   line-height: 24px;
 }
+=======
+>>>>>>> moved the components folder to spotify remix folder
 .playlist-list {
   margin: 0px;
   padding: 0px;
 }
 .horizontal-line-style {
+<<<<<<< HEAD
   width: 98%;
   margin: 0px;
 }
@@ -360,6 +364,17 @@
   .no-display {
     display: none;
   }
+=======
+  margin: 0px;
+  border: none;
+  border-top: 1px solid #475569;
+}
+
+.playlist-sidebar-container {
+  display: flex;
+}
+@media (max-width: 425px) {
+>>>>>>> moved the components folder to spotify remix folder
   .playlist-list {
     margin: 0px;
     padding: 0px;
