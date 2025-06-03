@@ -24,6 +24,7 @@
 }
 @media (max-width: 425px) {
   .category-section-container {
+    width: 90%;
     gap: 24px;
     margin: 0px 0px;
     padding-left: 24px;

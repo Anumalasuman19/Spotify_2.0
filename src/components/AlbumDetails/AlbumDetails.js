@@ -150,7 +150,7 @@ const AlbumDetails = ({match, history}) => {
       <div className="playlist-sidebar-container">
         <SideBar />
       </div>
-      <div className="playlist-content-wrapper">
+      <div className="playlist-content">
         <button type="button" className="back-button" onClick={onClickOfBack}>
           <img
             src="https://res.cloudinary.com/dzki1pesn/image/upload/v1747725509/kytu7w7vqvvwe4iwz1l6.png"
