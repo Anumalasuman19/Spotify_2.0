@@ -1,36 +1,3 @@
-<<<<<<< HEAD
-.category-item-details-container {
-  width: 12%;
-  height: 256px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  text-decoration: none;
-}
-
-.category-img {
-  width: 100%;
-  height: 166px;
-  border-radius: 4px;
-}
-.name {
-  font-size: 20px;
-  font-weight: 700;
-  color: #ffffff;
-  margin: 0px;
-  text-align: center;
-}
-.total-tracks {
-  font-size: 18px;
-  font-weight: 600;
-  color: #64748b;
-  margin: 0px;
-  text-align: center;
-}
-
-=======
->>>>>>> moved the components folder to spotify remix folder
 .category-container {
   width: 100%;
   height: 100vh;
@@ -62,19 +29,7 @@
   margin: 0px;
   margin-left: 34px;
 }
-<<<<<<< HEAD
-@media (width: 360px) and (height: 640px) {
-  .category-item-details-container {
-    width: 80%;
-    height: 84px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 16px;
-  }
-=======
 @media (max-width: 425px) {
->>>>>>> moved the components folder to spotify remix folder
   .podcast-text {
     font-size: 24px;
     color: #ffffff;
@@ -83,30 +38,6 @@
     margin-left: 24px;
   }
 
-<<<<<<< HEAD
-  .category-img {
-    width: 80px;
-    height: 80px;
-    border-radius: 4px;
-  }
-  .name {
-    font-size: 16px;
-    font-weight: 700;
-    color: #ffffff;
-    margin: 0px;
-    text-align: left;
-  }
-  .total-tracks {
-    font-size: 14px;
-    font-weight: 400;
-    color: #64748b;
-    margin: 0px;
-    margin-top: 4px;
-    text-align: left;
-  }
-
-=======
->>>>>>> moved the components folder to spotify remix folder
   .category-container {
     width: 100%;
     height: 100vh;
@@ -129,9 +60,6 @@
     gap: 16px;
     padding-left: 24px;
     margin: 0px;
-<<<<<<< HEAD
-=======
     padding-bottom: 40px;
->>>>>>> moved the components folder to spotify remix folder
   }
 }

@@ -1,78 +1,14 @@
-<<<<<<< HEAD
-.album-item-container {
-  width: 100%;
-  height: 41px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 0px 32px;
-  color: #ffffff;
-  margin: 0px;
-}
-
-.album-item-container p {
-  margin: 0px;
-  font-size: 16px;
-  font-weight: 500;
-  color: #ffffff;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.album-item-container > p:nth-child(1) {
-  /* Track Number */
-  width: 30px;
-  flex-shrink: 0;
-  text-align: left;
-  flex: 0.5;
-}
-
-.album-item-container > p:nth-child(2) {
-  /* Track Name */
-  flex: 1.5;
-}
-
-.album-item-container > p:nth-child(3) {
-  /* Album */
-  flex: 1;
-}
-
-.album-item-container > p:nth-child(4) {
-  /* Time */
-  width: 60px;
-  flex-shrink: 0;
-  flex: 1;
-}
 .current-song-container {
-  width: 100%;
-=======
-.current-song-container {
->>>>>>> moved the components folder to spotify remix folder
   justify-self: flex-end;
 }
 .album-list {
   padding: 0px;
-<<<<<<< HEAD
-  margin: 0px;
-=======
->>>>>>> moved the components folder to spotify remix folder
 }
 .back-and-album-container {
   width: 100%;
   display: flex;
   flex-direction: column;
 }
-<<<<<<< HEAD
-.horizontal-line {
-  width: 100%;
-}
-.album-titles-and-album-list {
-  margin-top: 24px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-=======
 
 .album-titles-and-album-list {
   display: flex;
@@ -104,5 +40,4 @@
   .album-no-display {
     display: none;
   }
->>>>>>> moved the components folder to spotify remix folder
 }

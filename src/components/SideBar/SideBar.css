@@ -1,36 +1,21 @@
 .sidebar-container {
-<<<<<<< HEAD
-  width: 8%;
-  height: 100%;
-=======
->>>>>>> moved the components folder to spotify remix folder
   background-color: #040306;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   flex-shrink: 0;
-<<<<<<< HEAD
-=======
   padding: 0px 8px;
   padding-top: 24px;
   padding-bottom: 30px;
->>>>>>> moved the components folder to spotify remix folder
 }
 .logout-button {
   background-color: transparent;
   border: 0px;
-<<<<<<< HEAD
-  margin-bottom: 24px;
-}
-.logout-icon {
-  width: 100%;
-=======
 }
 .logout-icon {
   width: 36px;
   height: 36px;
->>>>>>> moved the components folder to spotify remix folder
 }
 .logout-text {
   font-size: 12px;
@@ -40,39 +25,22 @@
   margin: 0px;
 }
 .spotify-logo {
-<<<<<<< HEAD
-  width: 80%;
-  margin-top: 24px;
-}
-@media (width: 360px) and (height: 640px) {
-  .sidebar-container {
-    width: 100%;
-    height: 8%;
-=======
   width: 82px;
   height: 33px;
 }
 @media (max-width: 425px) {
   .sidebar-container {
->>>>>>> moved the components folder to spotify remix folder
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-<<<<<<< HEAD
-=======
     padding: 0px;
     padding: 16px 24px;
->>>>>>> moved the components folder to spotify remix folder
   }
   .spotify-logo {
     width: 64px;
     height: 24px;
     margin: 0px;
-<<<<<<< HEAD
-    padding-left: 24px;
-=======
->>>>>>> moved the components folder to spotify remix folder
   }
   .logout-icon {
     width: 30px;
@@ -83,10 +51,6 @@
     margin: 0px;
     padding: 0px;
     display: flex;
-<<<<<<< HEAD
-    margin-right: 10px;
-=======
->>>>>>> moved the components folder to spotify remix folder
     gap: 8px;
   }
   .logout-text {
