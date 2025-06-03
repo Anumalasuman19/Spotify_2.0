@@ -6,7 +6,6 @@
   background-color: #181818;
   padding: 24px;
   align-self: flex-end;
-  border: 1px solid green;
 }
 
 .song-info {
@@ -49,7 +48,6 @@
   display: flex;
   justify-content: flex-start;
   background-color: transparent;
-  border: 1px solid green;
 }
 
 .audio-element {
