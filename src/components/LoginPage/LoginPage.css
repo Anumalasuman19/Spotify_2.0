@@ -71,6 +71,7 @@
   font-weight: 700;
   margin-top: 8px;
   padding: 12px 181px;
+  cursor: pointer;
 }
 .error-message {
   color: red;

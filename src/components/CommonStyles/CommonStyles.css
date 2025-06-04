@@ -11,6 +11,7 @@
   align-items: center;
   padding: 0px 32px;
   color: #ffffff;
+  cursor: pointer;
 }
 .playlist-selected-item-container {
   background-color: #303030;
@@ -45,6 +46,7 @@
   padding: 0px 32px;
   color: #ffffff;
   margin: 0px;
+  cursor: pointer;
 }
 
 .track-number {
@@ -109,6 +111,7 @@
   display: flex;
   gap: 4px;
   justify-content: center;
+  cursor: pointer;
 }
 
 .back-text {

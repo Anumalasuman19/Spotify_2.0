@@ -4,8 +4,8 @@ import './AudioPlayer.css'
 const AudioPlayer = ({track, imgUrl}) => {
   const artistsName = track.artists?.map(artist => artist.name).join(', ') ?? ''
   const audioRef = useRef(null)
-  const [isPlaying, setIsPlaying] = useState(false)
-
+  const [isPlaying, setIsPlaying] = useState(true)
+  console.log(isPlaying)
   const togglePlayPause = () => {
     if (!audioRef.current) return
 
@@ -16,7 +16,9 @@ const AudioPlayer = ({track, imgUrl}) => {
     }
     setIsPlaying(prev => !prev)
   }
-
+  useEffect(() => {
+    setIsPlaying(true)
+  }, [track])
   return (
     <div className="audio-container">
       <div className="song-info">

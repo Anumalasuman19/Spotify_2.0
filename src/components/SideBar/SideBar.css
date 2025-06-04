@@ -12,6 +12,7 @@
 .logout-button {
   background-color: transparent;
   border: 0px;
+  cursor: pointer;
 }
 .logout-icon {
   width: 36px;

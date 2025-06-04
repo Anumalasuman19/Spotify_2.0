@@ -74,6 +74,7 @@ const PlaylistsDetails = ({match, history}) => {
   const renderSection = () => {
     const padding = ''
     let content
+    console.log(currentSelectedTrack)
     switch (playlistApiStatus) {
       case ApiStatus.inprogress:
         content = (
@@ -159,7 +160,8 @@ const PlaylistsDetails = ({match, history}) => {
           <p className="back-text">Back</p>
         </button>
         {renderSection()}
-        {playlistApiStatus === ApiStatus.success ? (
+        {playlistApiStatus === ApiStatus.success &&
+        Object.keys(currentSelectedTrack).length !== 0 ? (
           <div>
             <hr className="horizontal-line-style" />
             <AudioPlayer

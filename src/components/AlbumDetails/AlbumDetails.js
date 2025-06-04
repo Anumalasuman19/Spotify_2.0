@@ -159,7 +159,8 @@ const AlbumDetails = ({match, history}) => {
           <p className="back-text">Back</p>
         </button>
         {renderSection()}
-        {newReleaseAlbumStatus === ApiStatus.success ? (
+        {newReleaseAlbumStatus === ApiStatus.success &&
+        Object.keys(currentPlayingAlbum).length !== 0 ? (
           <div className="current-song-container">
             <hr className="horizontal-line-style" />
             <AudioPlayer
