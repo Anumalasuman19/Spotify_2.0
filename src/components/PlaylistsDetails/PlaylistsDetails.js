@@ -45,13 +45,11 @@ const PlaylistsDetails = ({match, history}) => {
       headers: {Authorization: `Bearer ${jwtToken}`},
     }
     const response = await fetch(url, options)
-    console.log(response)
     if (response.ok) {
       const rawData = await response.json()
       const jsonData = convertKeysToCamelCase(rawData)
       SetPlaylistData(jsonData)
       SetPlaylistApiStatus(ApiStatus.success)
-      console.log(jsonData)
     } else {
       SetPlaylistApiStatus(ApiStatus.failure)
     }
@@ -74,7 +72,6 @@ const PlaylistsDetails = ({match, history}) => {
   const renderSection = () => {
     const padding = ''
     let content
-    console.log(currentSelectedTrack)
     switch (playlistApiStatus) {
       case ApiStatus.inprogress:
         content = (

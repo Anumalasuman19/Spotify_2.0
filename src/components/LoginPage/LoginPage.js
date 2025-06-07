@@ -18,7 +18,6 @@ const LoginPage = props => {
   }
 
   const onLoginSuccess = jwtToken => {
-    console.log(jwtToken)
     Cookies.set('jwt_token', jwtToken, {
       expires: 30,
       path: '/',

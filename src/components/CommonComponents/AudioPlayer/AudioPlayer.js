@@ -5,7 +5,6 @@ const AudioPlayer = ({track, imgUrl}) => {
   const artistsName = track.artists?.map(artist => artist.name).join(', ') ?? ''
   const audioRef = useRef(null)
   const [isPlaying, setIsPlaying] = useState(true)
-  console.log(isPlaying)
   const togglePlayPause = () => {
     if (!audioRef.current) return
 

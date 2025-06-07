@@ -35,7 +35,6 @@ const AlbumDetails = ({match, history}) => {
 
   const newReleaseAlbumPlaylistApiUrl = async () => {
     SetNewReleaseAlbumStatus(ApiStatus.inprogress)
-    console.log(newReleaseAlbumStatus)
     const {id} = match.params
     const url = `https://apis2.ccbp.in/spotify-clone/album-details/${id}`
     const jwtToken = Cookies.get('jwt_token')
@@ -49,7 +48,6 @@ const AlbumDetails = ({match, history}) => {
     if (response.ok) {
       SetNewReleaseAlbumData(jsonData)
       SetNewReleaseAlbumStatus(ApiStatus.success)
-      console.log(jsonData)
     } else {
       SetNewReleaseAlbumStatus(ApiStatus.failure)
     }

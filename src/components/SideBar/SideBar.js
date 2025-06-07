@@ -4,7 +4,6 @@ import './SideBar.css'
 
 const SideBar = props => {
   const onClickOfLogout = () => {
-    console.log('Login route')
     Cookies.remove('jwt_token')
     const {history} = props
     history.replace('/login')

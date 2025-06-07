@@ -30,7 +30,6 @@ const CategoryPlaylistsDetails = ({match, history}) => {
 
   const categoryApiUrl = async () => {
     SetCategoryApiStatus(ApiStatus.inprogress)
-    console.log(categoryApiStatus)
     const {id} = match.params
     const url = `https://apis2.ccbp.in/spotify-clone/category-playlists/${id}`
     const jwtToken = Cookies.get('jwt_token')
@@ -78,8 +77,6 @@ const CategoryPlaylistsDetails = ({match, history}) => {
         const trackItems = Array.isArray(categoryApiData?.playlists.items)
           ? categoryApiData.playlists.items
           : []
-        console.log('trackItems')
-        console.log(categoryApiData.playlists.items)
         content = (
           <div className="category-content-container">
             <p className="podcast-text">Podcast</p>
